@@ -1,5 +1,5 @@
 import { Box, Button, Grid,  Modal, Typography} from "@mui/material";
-import { Authendication } from "../../api/Auth";
+import { Authendication } from "../../services/Auth";
 import { useNavigate } from "react-router-dom";
 import {useEffect,useState} from "react"
 import QrCode2Icon from '@mui/icons-material/QrCode2';
@@ -21,7 +21,8 @@ export default function Layout(props:any) {
           await Authendication.isLogged()    
           setIsLogged(true)    
           navigate("/")    
-        }catch(err:any){        
+        }catch(err:any){  
+                
             setIsLogged(false)
         }
       }
@@ -44,7 +45,7 @@ export default function Layout(props:any) {
           counter++
           if(counter >= images.length) counter = 0
           setCurrentImage(images[counter])
-            console.log("a")
+            // console.log("a")
         },3000)
 
         return ()=>{
@@ -85,12 +86,12 @@ export default function Layout(props:any) {
         <Grid item sm={0} md={9} sx={{width:"100%", maxHeight:"100%",display:{xs:"none" , md:"inline"}}}  >
 
           <Box component="div" sx={{width:"100%",maxHeight:"100%",overflow:"hidden"}}>
-            <img style={{width:"100%",height:"100%",objectFit:"cover",transition:"2s"}} src={currentImage} alt="" />
+            {/* <img style={{width:"100%",height:"100%",objectFit:"cover",transition:"2s"}} src={currentImage} alt="" /> */}
           </Box>
 
         </Grid>
 
-        <Grid item  xs={12} md={3} sx={{display:"flex",flexWrap:"wrap"}}>
+        <Grid item  xs={12} md={3}  sx={{display:"flex",flexWrap:"wrap"}}>
 
           <Grid item xs={12} sx={{display:"flex",justifyContent:"center"}}>
 

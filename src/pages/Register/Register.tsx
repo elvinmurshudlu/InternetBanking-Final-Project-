@@ -1,7 +1,7 @@
 import {useState , useEffect} from "react"
 
 import { useNavigate} from "react-router-dom"
-import { Authendication } from "../../api/Auth"
+import { Authendication } from "../../services/Auth"
 
 
 export default function Register() {

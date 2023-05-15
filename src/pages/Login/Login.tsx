@@ -1,6 +1,6 @@
 import { Box, Button, FormControl,   FormHelperText, Grid,  TextField } from "@mui/material";
 import { useState ,useEffect} from "react";
-import { Authendication } from "../../api/Auth";
+import { Authendication } from "../../services/Auth";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {

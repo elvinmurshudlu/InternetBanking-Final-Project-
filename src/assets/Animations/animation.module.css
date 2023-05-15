@@ -1,0 +1,78 @@
+.box {
+  width: 500px;
+  height: 500px;
+  background-color: #fff;
+  border-radius: 100%;
+  position: absolute;
+  z-index: 0;
+}
+
+.one {
+  top: 20%;
+  left: -20%;
+  animation: oneAnimation 7s infinite;
+}
+
+.two {
+  top: -25%;
+  right: 15%;
+  animation: twoAnimation 7s infinite;
+}
+
+.three {
+  bottom: -40%;
+  right: 0%;
+  animation: threeAnimation 7s infinite;
+}
+
+@keyframes oneAnimation {
+  0% {
+    left: -20%;
+  }
+  25% {
+    left: -22%;
+  }
+  50% {
+    left: -25%;
+  }
+  75% {
+    left: -22%;
+  }
+  100% {
+    left: -20%;
+  }
+}
+@keyframes twoAnimation {
+  0% {
+    top: -25%;
+  }
+  25% {
+    top: -22%;
+  }
+  50% {
+    top: -20%;
+  }
+  75% {
+    top: -22%;
+  }
+  100% {
+    top: -25%;
+  }
+}
+@keyframes threeAnimation {
+  0% {
+    bottom: -40%;
+  }
+  25% {
+    bottom: -42%;
+  }
+  50% {
+    bottom: -45%;
+  }
+  75% {
+    bottom: -42%;
+  }
+  100% {
+    bottom: -40%;
+  }
+}/*# sourceMappingURL=animation.module.css.map */

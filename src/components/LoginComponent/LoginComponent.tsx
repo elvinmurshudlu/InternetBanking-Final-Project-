@@ -9,15 +9,14 @@ import {
   createTheme,
 } from "@mui/material";
 import { useState } from "react";
-import { Authendication } from "../../api/Auth";
+import { Authendication } from "../../services/Auth";
 import { useNavigate } from "react-router-dom";
 import { validate } from "../../validation/Validation";
-import { Login, LoginError } from "../../Models/Interface";
+import { Login, LoginError } from "../../Models/LoginRegister";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
-import { purple, red } from "@mui/material/colors";
+import {  red } from "@mui/material/colors";
 
-// import {Button} from "@mui/joy"
 import { Button } from "@mui/material";
 
 export default function LoginComponent() {
@@ -52,13 +51,14 @@ export default function LoginComponent() {
     for (let a in userInformation) {
       let key = a as keyof typeof userInformation;
 
-      if (validate[key](userInformation[key])) {
+      if (!validate[key](userInformation[key])) {
+        console.log("gsdfsf");
         result = false;
       }
 
       setInformationErrors((prevVal) => ({
         ...prevVal,
-        [key]: validate[key](userInformation[key]),
+        [key]: !validate[key](userInformation[key]),
       }));
     }
 
@@ -68,7 +68,6 @@ export default function LoginComponent() {
   async function submit(e: Event) {
     e.preventDefault();
 
-    // console.log(freeFromError());
 
     if (freeFromError()) {
       try {
@@ -80,7 +79,6 @@ export default function LoginComponent() {
         navigate("/");
       } catch (err: any) {
         setError(true);
-        // console.log(err.response.status)
       }
     }
   }
