@@ -1,16 +1,22 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import {useEffect , useState} from "react"
 import { Authendication } from "../../services/Auth"
-import { Box, Grid, Typography } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 import Aside from "../Aside/Aside"
-import { deepPurple, indigo } from "@mui/material/colors"
+import { deepPurple } from "@mui/material/colors"
 
 import animation from "../../assets/Animations/animation.module.css"
 import Header from "../../components/Header/Header"
+import { useDispatch } from "react-redux"
+import { fetchCards } from "../../features/cardsSlice"
+import { useAppDispatch } from "../../store/store"
 
 export default function MainLayout() {  
 
   let [isLogged,setIsLogged] = useState(false)
+
+  let dispatch = useAppDispatch()
+
   let location = useLocation()
 
   let navigate = useNavigate()
@@ -32,6 +38,11 @@ export default function MainLayout() {
 
   useEffect(()=>{
       isAuthendicated()
+
+
+
+      dispatch(fetchCards())
+
   },[location]) 
 
    return  (
@@ -42,19 +53,18 @@ export default function MainLayout() {
     
     <Grid container sx={{width:"100%",height:"100vh",background:`linear-gradient(to right ,${deepPurple["A700"]},${deepPurple["800"]}  )`}} >
 
-      <Grid item md={2} sx={{display:{xs:"none",lg:"flex"},justifyContent:"center"}}>
+      <Grid item lg={2} sx={{display:{xs:"none",lg:"flex"},justifyContent:"center"}}>
 
         <Aside></Aside>
 
       </Grid>
 
-      <Grid item xs={12} md={10} sx={{position:"relative",overflow:"hidden"}}>
+      <Grid item xs={12} lg={10} sx={{position:"relative",overflow:"hidden"}}>
 
 
-          <Box sx={{position:"absolute",zIndex:"1",width:"100%",height:"100%",padding:"15px 35px"}}>
+          <Box sx={{position:"absolute",zIndex:"1",width:"100%",height:"100%",padding:"15px 35px",overflow:"scroll"}}>
 
               <Header></Header>
-
               <Outlet></Outlet> 
 
 

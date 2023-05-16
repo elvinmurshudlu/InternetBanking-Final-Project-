@@ -1,5 +1,5 @@
-import { Dashboard, Message, Notifications, Person } from "@mui/icons-material";
-import { Avatar, Badge, Box, IconButton, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, TextField, ThemeProvider, Typography } from "@mui/material";
+import {  Message, Notifications, Person } from "@mui/icons-material";
+import { Avatar, Badge, Box, IconButton, InputAdornment, List, ListItem, TextField, ThemeProvider, Typography } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import { useLocation } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
@@ -40,9 +40,9 @@ useEffect(()=>{
 
             </Typography>
 
-            <TextField size="small" InputProps={{endAdornment:(<InputAdornment position="start"><SearchIcon sx={{color:"white"}}></SearchIcon></InputAdornment>)}}  placeholder="Search here ..."></TextField>
+            <TextField sx={{display:{xs:"none",sm:"flex"}}} size="small" InputProps={{endAdornment:(<InputAdornment position="start"><SearchIcon sx={{color:"white"}}></SearchIcon></InputAdornment>)}}  placeholder="Search here ..."></TextField>
         
-            <List sx={{display:"flex",fontSize:"30px"}}>
+            <List sx={{display:{xs:"none",md:"flex"},fontSize:"30px"}}>
                 <ListItem>
                     <IconButton>
                         <Badge badgeContent="20" color="secondary" max={10}> 

@@ -1,17 +1,15 @@
 import {createBrowserRouter } from "react-router-dom"
 import {ROUTES} from "../constants/routePath"
-import Login from "../pages/Login/Login"
-import Register from "../pages/Register/Register"
 import MainLayout from "../layouts/MainPage/MainLayout"
 import Layout from "../layouts/LoginRegister/Layout"
 import LoginComponent from "../components/LoginComponent/LoginComponent"
 import RegisterComponent from "../components/RegisterComponent/RegisterComponent"
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import Cards from "../pages/Cards/Cards"
 
 
 
-export const routes = createBrowserRouter([
-    
+export const routes = createBrowserRouter([    
     {
             path:ROUTES.BASEURL,
             element:<MainLayout></MainLayout>,
@@ -26,7 +24,7 @@ export const routes = createBrowserRouter([
             ,
             {
                 path:ROUTES.CARDS,
-                element:<div>cards</div>
+                element:<Cards></Cards>
                 
             }
             ,
