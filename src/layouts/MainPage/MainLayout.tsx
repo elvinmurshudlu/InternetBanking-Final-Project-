@@ -10,6 +10,8 @@ import Header from "../../components/Header/Header"
 import { useDispatch } from "react-redux"
 import { fetchCards } from "../../features/cardsSlice"
 import { useAppDispatch } from "../../store/store"
+import { server, serverIp, serverPort } from "../../services/config"
+import { setTransactions } from "../../features/transactionSlice"
 
 export default function MainLayout() {  
 
@@ -23,27 +25,67 @@ export default function MainLayout() {
 
   async function isAuthendicated(){
     try{
-
       await Authendication.isLogged()
-
       setIsLogged(true)
-
+      return true
 
     }catch(err:any){    
 
        navigate("/login")
-
+       return false
     }
   }
+  const [socket, setSocket] = useState<any>(null);
 
   useEffect(()=>{
-      isAuthendicated()
+      isAuthendicated() 
+      if(isLogged){
+        dispatch(fetchCards())
+
+
+        let cookie = document.cookie.split("=")[1]  
+        const newSocket = new WebSocket(`ws://${serverIp+serverPort}?sessionId=${cookie}`);
+  
+        newSocket.addEventListener('open', () => {
+          console.log('WebSocket connected');
+        });
+  
+        newSocket.addEventListener('message', (event) => {
+        
+        const data = JSON.parse(event.data)
+        if(data.type ==="transaction_created"){
+          
+        }
+        else if(data.type == "transaction_updated"){
+          dispatch(setTransactions(data.data))
+
+        }
+        
+        else{
+          dispatch(setTransactions(data))
+        }
+        // console.log(JSON.stringify(data[0]))
+      });
+  
+      newSocket.addEventListener('close', () => {
+        console.log('WebSocket disconnected');
+      });
+  
+      setSocket(newSocket);
+  
+      return () => {
+        newSocket.close();
+      };
 
 
 
-      dispatch(fetchCards())
 
-  },[location]) 
+      }
+      
+
+     
+
+  },[location,isLogged]) 
 
    return  (
 

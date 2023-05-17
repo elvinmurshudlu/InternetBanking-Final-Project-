@@ -4,11 +4,11 @@ import React from 'react'
 import { cardTheme } from '../../assets/Themes/CardTheme'
 import { ICardProps } from '../../Models/Card'
 
-export default function Card({cardInformation}:ICardProps) {
+export default function Card({cardInformation,selected}:ICardProps) {
   return (
             <ThemeProvider theme={cardTheme}>
 
-<Box component="div" sx={{
+            <Box component="div" sx={{
               width:"300px",
               height:"100%",
               backgroundColor:"rgba(101,31,255,0.6)",
@@ -18,6 +18,8 @@ export default function Card({cardInformation}:ICardProps) {
               display:"flex",
               flexDirection:"column",
               justifyContent:"space-between",
+              cursor:"pointer",
+              border:selected ? `2px solid ${deepPurple['900']}` : 'none'
               
           
             }}>

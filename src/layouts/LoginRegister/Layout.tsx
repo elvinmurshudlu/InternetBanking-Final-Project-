@@ -81,7 +81,7 @@ export default function Layout(props:any) {
     <>
     {isLogged || 
     
-    <Grid container sx={{width:"100%",height:"100vh"}}>
+    <Grid  container sx={{width:"100%",height:"100vh"}}>
 
         <Grid item sm={0} md={9} sx={{width:"100%", maxHeight:"100%",display:{xs:"none" , md:"inline"}}}  >
 

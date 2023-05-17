@@ -1,11 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit"
 import cardsSlice from "../features/cardsSlice"
 import { useDispatch } from "react-redux"
+import transactionSlice from "../features/transactionSlice"
 
 
 const store = configureStore({
     reducer:{
-        userCards:cardsSlice
+        userCards:cardsSlice,
+        userTransactions:transactionSlice
     }
 })
 

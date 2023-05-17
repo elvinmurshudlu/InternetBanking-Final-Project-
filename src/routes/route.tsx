@@ -6,6 +6,7 @@ import LoginComponent from "../components/LoginComponent/LoginComponent"
 import RegisterComponent from "../components/RegisterComponent/RegisterComponent"
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Cards from "../pages/Cards/Cards"
+import Transactions from "../pages/Transactions/Transactions"
 
 
 
@@ -30,7 +31,7 @@ export const routes = createBrowserRouter([
             ,
             {
                 path:ROUTES.TRANSACTIONS,
-                element:<div>Transactions</div>
+                element:<Transactions></Transactions>
                 
             }
             ,

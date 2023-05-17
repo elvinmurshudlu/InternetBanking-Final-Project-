@@ -1,6 +1,9 @@
 export interface ICardProps{
-    cardInformation:ICard
+    cardInformation:ICard,
+    selected?:boolean,
 }
+
+
 
 export interface ICard{
     id:number,
