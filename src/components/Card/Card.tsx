@@ -11,7 +11,7 @@ export default function Card({cardInformation,selected}:ICardProps) {
             <Box component="div" sx={{
               width:"300px",
               height:"100%",
-              backgroundColor:"rgba(101,31,255,0.6)",
+              backgroundColor:`rgba(81,45,168,0.3)`,
               // background:"transparent",
               borderRadius:"15px",
               padding:"20px",

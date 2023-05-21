@@ -11,15 +11,15 @@ export default function Transactions() {
 
   return (
     
-    <Grid container sx={{width:"100%",padding:"10px 0 0 0",height:"100%"}}>
+    <Grid container sx={{width:"100%",padding:"20px 0 ",height:"100%"}}>
 
                                                    {/* ,overflow:"scroll" */}
-          <Grid item xs={12} md={8} sx={{height:"100%",padding:"0 0 15px 0"}}>
+          <Grid item xs={12} md={8} sx={{height:"100%"}}>
 
             <Trasactions transactions={transactions}></Trasactions>
  
           </Grid>
-          <Grid item md={4} sx={{display:{xs:"none",md:"flex"}}}>
+              <Grid item md={4} sx={{display:{xs:"none",md:"flex"}}}>
 
           </Grid>
           

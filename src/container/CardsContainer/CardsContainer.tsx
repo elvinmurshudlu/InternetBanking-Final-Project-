@@ -60,7 +60,7 @@ export default function CardsContainer() {
 
           <Box>{
             cards && cards.map((card:ICard,index:number)=>(
-              <IconButton size='small' sx={{fontSize:"10px"}}  onClick={()=>setCurrentSlider(index)}><CircleIcon fontSize='inherit' sx={{color:index === currentSlider ? deepPurple["900"]:deepPurple["300"]}}></CircleIcon></IconButton>
+              <IconButton size='small' sx={{fontSize:"10px"}}  onClick={()=>setCurrentSlider(index)}><CircleIcon fontSize='inherit' sx={{color:index === currentSlider ? deepPurple["300"]:deepPurple["900"]}}></CircleIcon></IconButton>
             ))
             
             }</Box>
