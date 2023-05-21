@@ -2,7 +2,7 @@ import {  Grid } from "@mui/material";
 import {  GridColDef } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import Trasactions from "../../components/Transactions/Trasactions";
+import Trasactions from "../../components/Transactions/TrasactionsLists";
 
 export default function Transactions() {
 
@@ -13,13 +13,13 @@ export default function Transactions() {
     
     <Grid container sx={{width:"100%",padding:"10px 0 0 0",height:"100%"}}>
 
+                                                   {/* ,overflow:"scroll" */}
+          <Grid item xs={12} md={8} sx={{height:"100%",padding:"0 0 15px 0"}}>
 
-          <Grid item md={8} sx={{height:"100%",overflow:"scroll"}}>
-            
             <Trasactions transactions={transactions}></Trasactions>
-
+ 
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={4} sx={{display:{xs:"none",md:"flex"}}}>
 
           </Grid>
           
