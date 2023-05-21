@@ -103,11 +103,20 @@ export default function MainLayout() {
 
       <Grid item xs={12} lg={10} sx={{position:"relative",overflow:"hidden"}}>
 
+          <Box sx={{position:"absolute",zIndex:"1",width:"100%",height:"100%",padding:"0px 35px",overflow:"scroll",}}>
 
-          <Box sx={{position:"absolute",zIndex:"1",width:"100%",height:"100%",padding:"15px 35px",overflow:"scroll"}}>
+                <Box sx={{width:"100%",height:90,padding:"15px 0"}}>
+                    <Header ></Header>
+                </Box>
 
-              <Header></Header>
-              <Outlet></Outlet> 
+                                                     {/* ,overflow:"scroll" */}
+                <Box sx={{height:'calc(100vh - 90px)'}}> 
+                    <Outlet></Outlet>
+                  </Box> 
+           
+
+
+
 
 
           </Box>

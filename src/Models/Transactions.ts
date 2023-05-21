@@ -1,16 +1,11 @@
 export interface ITransactions{
     id: number
-    amount: string
-    fromUserId: number
-    senderName: string
-    recipientName: string
-    toUserId: string
-    fromCard: string
-    toCard: string
+    amount: number
     currency: string
-    transferType: string
-    transferHeader: string
-    notification: boolean
+    userId: number
+    type: string
+    connectedCard: string
+    connectedUser: string
     createdAt: string
     updatedAt: string
 }
