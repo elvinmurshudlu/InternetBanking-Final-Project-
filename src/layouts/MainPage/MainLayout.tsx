@@ -7,15 +7,17 @@ import { deepPurple } from "@mui/material/colors"
 
 import animation from "../../assets/Animations/animation.module.css"
 import Header from "../../components/Header/Header"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { fetchCards } from "../../features/cardsSlice"
-import { useAppDispatch } from "../../store/store"
+import { RootState, useAppDispatch } from "../../store/store"
 import { server, serverIp, serverPort } from "../../services/config"
-import { setTransactions } from "../../features/transactionSlice"
+import { addTransaction, setTransactions } from "../../features/transactionSlice"
 
 export default function MainLayout() {  
 
   let [isLogged,setIsLogged] = useState(false)
+
+  const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
 
   let dispatch = useAppDispatch()
 
@@ -40,7 +42,6 @@ export default function MainLayout() {
   useEffect(()=>{
       isAuthendicated() 
       if(isLogged){
-        dispatch(fetchCards())
 
 
         let cookie = document.cookie.split("=")[1]  
@@ -54,12 +55,14 @@ export default function MainLayout() {
         
         const data = JSON.parse(event.data)
         if(data.type ==="transaction_created"){
+              console.log(data);
+              dispatch(addTransaction(data.data))
           
         }
-        else if(data.type == "transaction_updated"){
-          dispatch(setTransactions(data.data))
+        // else if(data.type == "transaction_updated"){
+        //   dispatch(setTransactions(data.data))
 
-        }
+        // }
         
         else{
           dispatch(setTransactions(data))
@@ -86,6 +89,13 @@ export default function MainLayout() {
      
 
   },[location,isLogged]) 
+
+  useEffect(()=>{
+    if(isLogged){
+      dispatch(fetchCards())
+    }
+
+  },[location,isLogged,transactions])
 
    return  (
 

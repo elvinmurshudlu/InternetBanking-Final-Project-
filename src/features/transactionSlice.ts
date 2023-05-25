@@ -13,6 +13,10 @@ const transactionsSlice = createSlice({
     reducers:{
         setTransactions:(state,action:PayloadAction<ITransactions[]>)=>{
             state.transactions = action.payload
+        },
+        addTransaction:(state,action:PayloadAction<ITransactions>)=>{
+            state.transactions.push(action.payload)
+
         }
 
     }
@@ -21,4 +25,4 @@ const transactionsSlice = createSlice({
 
 export default transactionsSlice.reducer
 
-export const {setTransactions} = transactionsSlice.actions
+export const {setTransactions,addTransaction} = transactionsSlice.actions

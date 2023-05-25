@@ -4,14 +4,14 @@ import React from 'react'
 import { cardTheme } from '../../assets/Themes/CardTheme'
 import { ICardProps } from '../../Models/Card'
 
-export default function Card({cardInformation,selected}:ICardProps) {
+export default function Card({cardInformation,selected,color}:ICardProps) {
   return (
             <ThemeProvider theme={cardTheme}>
 
             <Box component="div" sx={{
-              width:"300px",
+              minWidth:"300px",
               height:"100%",
-              backgroundColor:`rgba(81,45,168,0.3)`,
+              backgroundColor:color ? color:`rgba(81,45,168,0.3)`,
               // background:"transparent",
               borderRadius:"15px",
               padding:"20px",

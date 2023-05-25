@@ -11,4 +11,14 @@ export class FetchData{
             }
         }) 
     }
+
+    static async quickTransfer(fromCardNumber:string,toCardNumber:string,amount:string){
+        const cookie = document.cookie.split("=")[1]
+        return await axios.post(`${server+serverPort+serverUrls.quickTransfer}`,{fromCardNumber,toCardNumber,amount},{
+            headers:{
+                Authorization:cookie
+            }
+        })
+
+    }
 }

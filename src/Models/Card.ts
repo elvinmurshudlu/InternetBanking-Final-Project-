@@ -1,6 +1,7 @@
 export interface ICardProps{
     cardInformation:ICard,
     selected?:boolean,
+    color?:string
 }
 
 

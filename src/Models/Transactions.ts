@@ -1,6 +1,6 @@
 export interface ITransactions{
     id: number
-    amount: number
+    amount: string
     currency: string
     userId: number
     type: string
