@@ -1,3 +1,10 @@
+import { SnackbarOrigin } from "@mui/material";
+
+export interface State extends SnackbarOrigin {
+    open: boolean;
+  }
+  
+
 
 export interface Login{
     "email":string,

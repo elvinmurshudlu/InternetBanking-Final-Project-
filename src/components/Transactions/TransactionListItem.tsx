@@ -19,9 +19,15 @@ export default function TransactionListItem({transaction}:{transaction:ITransact
 
     function amount(amount:string, currency:string){
 
-        return (amount < "0" ? `-${getSymbolFromCurrency(currency) + amount.slice(1,amount.length)}` :`${getSymbolFromCurrency(currency)+amount}`)
 
-
+      let result = ""
+      if(+amount <0){
+        result +="-"
+      }
+      
+      result += getSymbolFromCurrency(currency) + (amount >"0" ? + amount : (-amount)).toLocaleString()
+  
+      return result
     }
 
   return (

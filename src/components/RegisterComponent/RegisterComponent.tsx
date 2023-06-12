@@ -1,13 +1,11 @@
 import { CheckBox } from "@mui/icons-material";
 import { Alert, Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Snackbar, SnackbarOrigin, TextField } from "@mui/material";
 import {useState} from "react"
-import { Register } from "../../Models/LoginRegister";
+import { Register, State } from "../../Models/LoginRegister";
 import { validate } from "../../validation/Validation";
 import { Authendication } from "../../services/Auth";
 
-export interface State extends SnackbarOrigin {
-  open: boolean;
-}
+
 
 
 export default function RegisterComponent() {
@@ -19,6 +17,7 @@ export default function RegisterComponent() {
     vertical: 'top',
     horizontal: 'center',
   });
+
   const { vertical, horizontal, open } = state;
 
 
@@ -80,15 +79,13 @@ export default function RegisterComponent() {
     
     if(freeFromErrors()){      
       try{
-          let data =  await Authendication.register(credentials)
+          await Authendication.register(credentials)
 
           handleClose(true)
 
-          console.log(data);
 
       }catch(err:any){
 
-        console.log(err,"Error oldu")
         
         setCredentialsError(prevVal => ({...prevVal,["email"]:true}))
 
@@ -147,11 +144,11 @@ export default function RegisterComponent() {
     
 
     <Snackbar 
-    anchorOrigin={{vertical,horizontal}}
-    autoHideDuration={3000}
-    onClose={()=>handleClose(false)}
-    open={open}>
-        <Alert severity="success">Register succesfully</Alert>
+        anchorOrigin={{vertical,horizontal}}
+        autoHideDuration={3000}
+        onClose={()=>handleClose(false)}
+        open={open}>
+            <Alert severity="success">Register succesfully</Alert>
 
 
     </Snackbar>

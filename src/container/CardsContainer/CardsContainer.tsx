@@ -45,7 +45,7 @@ export default function CardsContainer() {
                     left:'0',
                     padding:"20px 0",
                     transform: `translateX(${(index - currentSlider)*105}%)`,
-                    transition:"1s",
+                    transition:"0.5s",
 
                   }}>
                         <Card  selected={currentSlider === index} key={index} cardInformation={card}></Card>

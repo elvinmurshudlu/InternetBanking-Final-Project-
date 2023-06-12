@@ -8,4 +8,5 @@ export interface ITransactions{
     connectedUser: string
     createdAt: string
     updatedAt: string
+    notification:boolean
 }

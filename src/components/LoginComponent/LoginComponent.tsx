@@ -71,12 +71,12 @@ export default function LoginComponent() {
 
     if (freeFromError()) {
       try {
-        let response = await Authendication.login(
-          userInformation.email,
-          userInformation.password
-        );
-        document.cookie = `TOKEN=${response.data}`;
-        navigate("/");
+          let response = await Authendication.login(
+            userInformation.email,
+            userInformation.password
+          );
+          document.cookie = `TOKEN=${response.data}`;
+          navigate("/");
       } catch (err: any) {
         setError(true);
       }

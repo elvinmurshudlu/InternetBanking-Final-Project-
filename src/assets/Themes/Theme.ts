@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { deepPurple } from "@mui/material/colors";
 
 export const theme  = createTheme({
     components:{
@@ -26,7 +27,6 @@ export const theme  = createTheme({
             styleOverrides:{
                 root:{
                     ".MuiIcon-root":{
-                        fontSize:"80px"
                     }
                 }
             }

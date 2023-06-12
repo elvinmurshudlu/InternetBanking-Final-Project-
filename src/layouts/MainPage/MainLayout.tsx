@@ -12,6 +12,9 @@ import { fetchCards } from "../../features/cardsSlice"
 import { RootState, useAppDispatch } from "../../store/store"
 import { server, serverIp, serverPort } from "../../services/config"
 import { addTransaction, setTransactions } from "../../features/transactionSlice"
+import { State } from "../../Models/LoginRegister"
+import { Alert, Snackbar } from "@mui/material"
+
 
 export default function MainLayout() {  
 
@@ -57,6 +60,7 @@ export default function MainLayout() {
         if(data.type ==="transaction_created"){
               console.log(data);
               dispatch(addTransaction(data.data))
+              data.data.notification && handleClose(true)
           
         }
         // else if(data.type == "transaction_updated"){
@@ -96,6 +100,31 @@ export default function MainLayout() {
     }
 
   },[location,isLogged,transactions])
+
+
+
+
+
+  const [state, setState] = useState<State>({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  })
+  const { vertical, horizontal, open } = state
+
+  function handleClose(isOpen: boolean) {
+    setState((prevVal) => ({
+      ...prevVal,
+      ["open"]: isOpen,
+    }))
+  }
+
+
+
+
+
+
+
 
    return  (
 
@@ -139,6 +168,27 @@ export default function MainLayout() {
         <div style={{background:`linear-gradient(to right , ${deepPurple["A700"]} , ${deepPurple["800"]} )`}} className={[animation.box,animation.three].join(" ")}></div>
       
       </Grid>
+
+
+      <Snackbar
+        anchorOrigin={{
+          vertical,
+          horizontal,
+        }}
+        autoHideDuration={3000}
+        onClose={() => handleClose(false)}
+        open={open}
+      >
+        <Alert
+          sx={{
+            backgroundColor: deepPurple["900"],
+          }}
+          variant="filled"
+          severity="success"
+        >
+          Money received 
+        </Alert>
+      </Snackbar>
 
     </Grid>
     

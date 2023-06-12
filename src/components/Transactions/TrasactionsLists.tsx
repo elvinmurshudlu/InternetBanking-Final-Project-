@@ -10,9 +10,9 @@ export default function Trasactions({transactions}:{transactions:ITransactions[]
 
   return (
     <Box sx={{width:"100%",padding:"0 0 10px 0",backgroundColor:`rgba(81,45,168,0.6)`,borderRadius:"15px",height:"100%"}}>
-          <Box sx={{width:"100%",height:"5%",padding:"10px 20px"}}> Filter</Box>
+          <Box sx={{width:"100%",height:"10%",padding:"10px 20px"}}> Filter</Box>
 
-            <List sx={{width:"100%"  ,height:"95%",overflow:"scroll",padding:"20px 0"}}>
+            <List sx={{width:"100%"  ,height:"90%",overflow:"scroll",padding:"5px 0"}}>
 
             {transactions.map((transaction)=>(
                 <TransactionListItem transaction={transaction}></TransactionListItem>
