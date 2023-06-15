@@ -7,6 +7,7 @@ import { ITransactions } from "../../Models/Transactions";
 import { State } from "../../Models/LoginRegister";
 import {useState} from "react"
 import CardsContainer from "../../container/CardsContainer/CardsContainer";
+import TransactionsTable from "../../components/Transactions/TransactionsTable";
 
 export default function Transactions() {      
       const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
@@ -30,16 +31,17 @@ export default function Transactions() {
 
   return (
     
-    <Grid container sx={{width:"100%",padding:" 0 ",height:"100%",rowGap:"20px"}}>
+    <Grid container sx={{width:"100%",padding:" 0 ",height:"100%",rowGap:"0px"}}>
 
-          <Grid item xs={8}>
-            <CardsContainer></CardsContainer>
+          <Grid item xs={12} md={8}>
+            <CardsContainer arrowControl={false}></CardsContainer>
           </Grid>
 
                                                   
-          <Grid item xs={12} lg={8} sx={{height:"100%"}}>
+          <Grid item xs={12}  sx={{height:"50%"}}>
 
             <Trasactions transactions={reverse(transactions)}></Trasactions>
+            {/* <TransactionsTable transactions={reverse(transactions)}></TransactionsTable> */}
  
           </Grid> 
           

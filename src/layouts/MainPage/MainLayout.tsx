@@ -149,7 +149,7 @@ export default function MainLayout() {
                 </Box>
 
                                                      {/* ,overflow:"scroll" */}
-                <Box sx={{height:'calc(100vh - 90px)',padding:"15px 35px",backgroundColor:"#F5F7FA",overflow:"hidden"}}> 
+                <Box sx={{height:'calc(100vh - 90px)',padding:"15px 35px",backgroundColor:"#F5F7FA",overflow:"scroll"}}> 
                     <Outlet ></Outlet>
                   </Box> 
            

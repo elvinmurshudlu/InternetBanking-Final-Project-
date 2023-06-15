@@ -1,4 +1,5 @@
 import {
+  Chip,
   Grid,
   ListItem,
   ListItemAvatar,
@@ -26,13 +27,16 @@ export default function TransactionListItem({
   }
 
   function cardContent(cardNumber: string) {
-    return `XXXX XXXX XXXX ${cardNumber.toString().slice(12, 16)}`
+    return ` ${cardNumber.toString().slice(0, 4)} **** **** ${cardNumber.toString().slice(12, 16)}`
   }
 
   function amount(amount: string, currency: string) {
     let result = ""
     if (+amount < 0) {
       result += "-"
+    }else{
+      result += "+"
+
     }
 
     result +=
@@ -42,44 +46,73 @@ export default function TransactionListItem({
     return result
   }
 
+  function download(event:any){
+    
+    event.stopPropagation()
+
+
+
+  }
+
   return (
     <ListItem sx={{ paddingTop: 1, paddingBottom: 1 }}>
       <ListItemButton
-        sx={{ height: 75, color: "white", display: "flex", flexWrap: "wrap" }}
+        sx={{ height: 70, color: "#505887", display: "flex", flexWrap: "wrap" }}
       >
         <Grid container>
-          <Grid item xs={4}>
+          <Grid item xs={2}>
             <ListItemAvatar></ListItemAvatar>
             <ListItemText>
-              {transaction.type}
+              {transaction.connectedUser}
               <ListItemText primaryTypographyProps={{ fontSize: "11px" }}>
-                {convertTime(transaction.createdAt)}
               </ListItemText>
             </ListItemText>
           </Grid>
           {/*  */}
 
-          <Grid item xs={3}>
+          <Grid item xs={1.5}>
+            <ListItemText primaryTypographyProps={{ fontSize: "14px" }}>
+              #{transaction.id}
+            </ListItemText>
+          </Grid>
+          {/*  */}
+          <Grid item xs={1.5}>
+            <ListItemText primaryTypographyProps={{ fontSize: "14px" }}>
+              {transaction.type}
+            </ListItemText>
+          </Grid>
+          {/*  */}
+
+          <Grid item xs={2}>
             <ListItemText primaryTypographyProps={{ fontSize: "14px" }}>
               {cardContent(transaction.connectedCard)}
             </ListItemText>
           </Grid>
           {/*  */}
-
-          <Grid item xs={3} sx={{ textAlign: "center" }}>
-            <ListItemText>
-              <ListItemIcon></ListItemIcon>
-              {transaction.amount < "0" ? "Outcome" : "Income"}
+          <Grid item xs={2}>
+            <ListItemText primaryTypographyProps={{ fontSize: "14px" }}>
+              {convertTime(transaction.createdAt)}
             </ListItemText>
           </Grid>
-
           {/*  */}
 
-          <Grid item xs={2} sx={{ textAlign: "end" }}>
-            <ListItemText>
+          
+
+          <Grid item xs={1} sx={{ textAlign: "start" }}>
+            <ListItemText sx={{color:+transaction.amount<0 ? "#FE5C73" : "#16DBAA"}}>
               {amount(transaction.amount, transaction.currency)}
             </ListItemText>
           </Grid>
+
+
+          {/*  */}
+           <Grid item xs={1.5} sx={{ textAlign: "center" }}>
+            <ListItemText>
+              <ListItemIcon></ListItemIcon>
+              <Chip onClick={download} label="Download" ></Chip>
+            </ListItemText>
+          </Grid>
+
         </Grid>
       </ListItemButton>
     </ListItem>

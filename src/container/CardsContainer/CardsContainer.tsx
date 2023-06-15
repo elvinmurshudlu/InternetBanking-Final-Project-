@@ -13,7 +13,7 @@ import { deepPurple } from '@mui/material/colors'
 
 
 
-export default function CardsContainer() {
+export default function CardsContainer({arrowControl=true}:{arrowControl?:boolean}) {
   const [ currentSlider , setCurrentSlider ] = useState(0)
 
   const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
@@ -56,7 +56,8 @@ export default function CardsContainer() {
           }
         </Box>
         
-        <Box  sx={{width:"100%",height:"5%",padding:"0 20px",display:"flex",justifyContent:"space-between"}}>
+        {
+          arrowControl && <Box  sx={{width:"100%",height:"5%",padding:"0 20px",display:"flex",justifyContent:"space-between"}}>
           <IconButton size='large' onClick={()=>changeCard(1)}><ArrowBackIosNew fontSize='small'></ArrowBackIosNew></IconButton>
 
           <Box>{
@@ -68,6 +69,7 @@ export default function CardsContainer() {
 
           <IconButton onClick={()=>changeCard(-1)} size='large'  ><ArrowForwardIos fontSize='small'></ArrowForwardIos></IconButton>
         </Box>
+        }
     </Box>
     )
 }
