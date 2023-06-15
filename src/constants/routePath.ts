@@ -2,10 +2,11 @@ export const ROUTES = {
     BASEURL:"/",
     LOGIN:"/login",
     REGISTER:"/register",
-    ACCOUNT:"/user",
-    CARDS:"/cards",
+    ACCOUNT:"/accounts",
+    CARDS:"/credit-cards",
     TRANSACTIONS:"/transactions",
-    STATISTICS:"/statistics",
-    INVOICES:"/invoices",
-    MYWALLET:"/mywallet"
+    INVESMENTS:"/invesments",
+    LOANS:"/loans",
+    SERVICES:"/services",
+    PRIVILAGES:"/my-privilages"
 }

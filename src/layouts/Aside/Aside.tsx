@@ -20,7 +20,7 @@ import { lists} from "../../constants/AsideLists"
 
 import { Link,  useLocation } from "react-router-dom";
 import {  style } from "./Aside.style";
-import { blue, deepPurple, indigo, red } from "@mui/material/colors";
+import { deepPurple } from "@mui/material/colors";
 
 
 
@@ -41,17 +41,19 @@ export default function Aside() {
         width: "100%",
         display: "flex",
         alignItems: "center",
-        background: `linear-gradient(#763ED0, #4A28B2)`,
-        borderTopRightRadius:"20px",
-        borderBottomRightRadius:"20px",
+        // background: `linear-gradient(#763ED0, #4A28B2)`,
+        backgroundColor: `#FFF`,
+        // borderTopRightRadius:"20px",
+        // borderBottomRightRadius:"20px",
+        borderRight:"2px solid #E6EFF5",
         flexDirection:"column",
-        padding:"35px 20px",
+        padding:"35px 0px",
         rowGap:"20px"
       }}
 
     >
 
-        <Typography sx={{display:"flex",alignItems:"center",fontSize:"30px",color:"white",columnGap:"20px"}}>
+        <Typography sx={{display:"flex",alignItems:"center",fontSize:"30px",color:"#343C6A",columnGap:"20px"}}>
             <Avatar variant="square" sx={{borderRadius:"10px",bgcolor:deepPurple["700"]}}>
               <AccountBalanceIcon></AccountBalanceIcon>
             </Avatar>

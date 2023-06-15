@@ -11,7 +11,6 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material"
-import { deepPurple } from "@mui/material/colors"
 import { useLocation } from "react-router-dom"
 import SearchIcon from "@mui/icons-material/Search"
 import { useState, useEffect } from "react"
@@ -62,6 +61,7 @@ export default function Header() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          backgroundColor:"#FFF"
         }}
       >
         <Typography
@@ -70,12 +70,12 @@ export default function Header() {
             fontSize: "35px",
             alignItems: "center",
             gap: "5px",
-            color: "white",
+            color: "#343C6A",
           }}
         >
           <Avatar
             variant="square"
-            sx={{ borderRadius: "10px", bgcolor: deepPurple["700"] }}
+            sx={{ borderRadius: "10px", bgcolor: "#FFF" }}
           >
             {currentPage.icon}
           </Avatar>

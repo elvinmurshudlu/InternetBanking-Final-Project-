@@ -12,9 +12,9 @@ export default function Card({ cardInformation, selected, color }: ICardProps) {
         sx={{
           minWidth: "300px",
           maxWidth:"360px",
-
+          transition:"1s",
           height: "100%",
-          backgroundColor: color ? color : `rgba(81,45,168,0.3)`,
+          background: selected ? "linear-gradient(#FFAA07,#D99D2A)" : `#FFF`,
           // background:"transparent",
           borderRadius: "15px",
           padding: "20px",
@@ -22,7 +22,7 @@ export default function Card({ cardInformation, selected, color }: ICardProps) {
           flexDirection: "column",
           justifyContent: "space-between",
           cursor: "pointer",
-          border: selected ? `2px solid ${deepPurple["900"]}` : "none",
+          // border: selected ? `2px solid ${deepPurple["900"]}` : "none",
         }}
       >
         <Box sx={{ width: "100%", position: "relative" }}>

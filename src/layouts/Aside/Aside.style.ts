@@ -3,7 +3,7 @@ import { indigo } from "@mui/material/colors"
 export const style = {
     "&.Mui-selected":{
         backgroundColor:"white",
-        color:indigo["800"],
+        color:"#2D60FF",
         "&:hover":{
             backgroundColor:"white",
             fontSize:"100px",
@@ -14,13 +14,13 @@ export const style = {
 
             "& .MuiSvgIcon-root":{
 
-                color: indigo["800"] // Change the color here
+                color: "#505887" // Change the color here
             },
       },
     }
     ,
     "&:hover":{
-            backgroundColor:indigo["200"] ,
+            backgroundColor:"white" ,
             color:indigo["800"]
     }
     ,
@@ -28,12 +28,14 @@ export const style = {
 
             "& .MuiSvgIcon-root":{
 
-                color: "white" // Change the color here
+                color: "#505887" // Change the color here
+
             },
       },
     
     borderRadius:"10px",
-    color:"white",
+    color: "#505887" // Change the color here
+
     
 }
 

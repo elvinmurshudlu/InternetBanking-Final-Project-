@@ -142,14 +142,14 @@ export default function MainLayout() {
 
       <Grid item xs={12} lg={10} sx={{position:"relative",overflow:"hidden"}}>
 
-          <Box sx={{position:"absolute",zIndex:"1",width:"100%",height:"100%",padding:"0px 35px",overflow:"scroll",}}>
+          <Box sx={{position:"absolute",zIndex:"1",width:"100%",height:"100%",padding:"0px 0px",overflow:"scroll",}}>
 
-                <Box sx={{width:"100%",height:90,padding:"15px 0"}}>
+                <Box sx={{width:"100%",height:90,padding:"0 15px",backgroundColor:"#FFF",display:"flex",alignItems:"center"}}>
                     <Header ></Header>
                 </Box>
 
                                                      {/* ,overflow:"scroll" */}
-                <Box sx={{height:'calc(100vh - 90px)'}}> 
+                <Box sx={{height:'calc(100vh - 90px)',padding:"15px 35px",backgroundColor:"#F5F7FA",overflow:"hidden"}}> 
                     <Outlet ></Outlet>
                   </Box> 
            
@@ -163,9 +163,9 @@ export default function MainLayout() {
 
 
           {/* //! animation circles */}
-        <div style={{background:`linear-gradient( ${deepPurple["A700"]} , ${deepPurple["600"]} )`}} className={[animation.box,animation.one].join(" ")}></div>
+        {/* <div style={{background:`linear-gradient( ${deepPurple["A700"]} , ${deepPurple["600"]} )`}} className={[animation.box,animation.one].join(" ")}></div>
         <div style={{background:`linear-gradient(to right , ${deepPurple["A700"]} , ${deepPurple["800"]} )`}} className={[animation.box,animation.two].join(" ")}></div>
-        <div style={{background:`linear-gradient(to right , ${deepPurple["A700"]} , ${deepPurple["800"]} )`}} className={[animation.box,animation.three].join(" ")}></div>
+        <div style={{background:`linear-gradient(to right , ${deepPurple["A700"]} , ${deepPurple["800"]} )`}} className={[animation.box,animation.three].join(" ")}></div> */}
       
       </Grid>
 

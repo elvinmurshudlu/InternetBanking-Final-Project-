@@ -1,4 +1,4 @@
-export const serverIp = "192.168.0.101"
+export const serverIp = "192.168.1.104"
 // export const serverIp = "192.168.42.196"
 
 export const server = `http://${serverIp}`

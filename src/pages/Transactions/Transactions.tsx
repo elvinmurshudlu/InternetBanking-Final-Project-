@@ -6,6 +6,7 @@ import QuickTransfer from "../../components/QuickTransfer/QuickTransfer";
 import { ITransactions } from "../../Models/Transactions";
 import { State } from "../../Models/LoginRegister";
 import {useState} from "react"
+import CardsContainer from "../../container/CardsContainer/CardsContainer";
 
 export default function Transactions() {      
       const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
@@ -29,22 +30,26 @@ export default function Transactions() {
 
   return (
     
-    <Grid container sx={{width:"100%",padding:"20px 0 ",height:"100%",rowGap:"20px"}}>
+    <Grid container sx={{width:"100%",padding:" 0 ",height:"100%",rowGap:"20px"}}>
 
-                                                   {/* ,overflow:"scroll" */}
+          <Grid item xs={8}>
+            <CardsContainer></CardsContainer>
+          </Grid>
+
+                                                  
           <Grid item xs={12} lg={8} sx={{height:"100%"}}>
 
             <Trasactions transactions={reverse(transactions)}></Trasactions>
  
-          </Grid>
+          </Grid> 
           
           
-          <Grid item xs={12}  lg={4} sx={{padding:{sx:"0",md:"0 15px"},height:"100%"}}>
+          {/* <Grid item xs={12}  lg={4} sx={{padding:{sx:"0",md:"0 15px"},height:"100%"}}>
 
               <QuickTransfer></QuickTransfer>
 
                 
-          </Grid>
+          </Grid> */}
           
 
           

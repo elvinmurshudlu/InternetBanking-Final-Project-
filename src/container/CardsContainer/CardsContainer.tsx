@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material'
+import { Box, IconButton ,Typography} from '@mui/material'
 import  { useState } from 'react'
 import Card from '../../components/Card/Card'
 import { useSelector } from 'react-redux'
@@ -30,8 +30,9 @@ export default function CardsContainer() {
 
   return (
 
-    <Box sx={{width:"100%",height:"250px",}}>
-        <Box sx={{width:"100%",height:"90%",position:"relative",overflow:"hidden"}}>
+    <Box sx={{width:"100%",height:"280px",}}>
+      <Typography variant="h6">My Cards</Typography>
+        <Box sx={{width:"100%",height:"80%",position:"relative",overflow:"hidden"}}>
           {
             cards  && cards.map((card:ICard,index:number)=>(
 
@@ -55,7 +56,7 @@ export default function CardsContainer() {
           }
         </Box>
         
-        <Box  sx={{width:"100%",height:"10%",padding:"0 20px",display:"flex",justifyContent:"space-between"}}>
+        <Box  sx={{width:"100%",height:"5%",padding:"0 20px",display:"flex",justifyContent:"space-between"}}>
           <IconButton size='large' onClick={()=>changeCard(1)}><ArrowBackIosNew fontSize='small'></ArrowBackIosNew></IconButton>
 
           <Box>{

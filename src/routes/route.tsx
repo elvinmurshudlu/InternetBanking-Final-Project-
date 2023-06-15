@@ -36,27 +36,35 @@ export const routes = createBrowserRouter([
             }
             ,
             {
-                path:ROUTES.INVOICES,
-                element:<div>Invoices</div>
+                path:ROUTES.ACCOUNT,
+                element:<div>Account</div>
                 
             }
             ,
             {
-                path:ROUTES.STATISTICS,
-                element:<div>Statistics</div>
-                
-            },
-            {
-                path:ROUTES.INVOICES,
-                element:<div>Invoices</div>
+                path:ROUTES.INVESMENTS,
+                element:<div>Invesments</div>
                 
             }
             ,
             {
-                path:ROUTES.MYWALLET,
-                element:<div>mywallet</div>
+                path:ROUTES.LOANS,
+                element:<div>Loans</div>
                 
             }
+            ,
+            {
+                path:ROUTES.SERVICES,
+                element:<div>Services</div>
+                
+            }
+            ,
+            {
+                path:ROUTES.PRIVILAGES,
+                element:<div>My Privilages</div>
+                
+            }
+            ,
         ]
     },
 

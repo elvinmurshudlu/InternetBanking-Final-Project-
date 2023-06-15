@@ -13,7 +13,7 @@ export const cardTheme = createTheme({
         MuiTypography:{
             styleOverrides:{
                 root:{
-                    color:"white"
+                    color:"black"
                 }
             },
             variants:[
