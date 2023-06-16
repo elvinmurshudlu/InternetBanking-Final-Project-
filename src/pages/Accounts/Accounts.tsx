@@ -8,6 +8,11 @@ import { ITransactions } from '../../Models/Transactions'
 import { IChip } from '../../Models/Chip'
 import { ICard } from '../../Models/Card'
 import TransactionAccount from '../../components/Transactions/TransactionAccount'
+import Section from '../../container/Section/Section'
+import AccountsChart from '../../components/AccountsChart/AccountsChart'
+
+
+
 
 export default function Accounts() {
   const [currentSlider , setCurrentSlider] = useState(0)
@@ -115,19 +120,37 @@ export default function Accounts() {
             
         </Grid>
 
-        <Grid item xs={12} md={7.5} lg={9} sx={{padding:"0 20px"}}>
-          <Typography gutterBottom variant='h6'>Last Transaction</Typography>
-          <Box sx={{width:"100%",height:"200px",backgroundColor:"#FFF",borderRadius:"20px",overflow:"scroll",padding:"20px 0"}}> 
-                  {filterTransactions(transactions).map((transaction)=>(
-                    <TransactionAccount transaction={transaction}></TransactionAccount>
-                  ))}
-          </Box>
+        <Grid item xs={12} md={7.5} lg={9} sx={{padding:"0 20px 0 0"}}>
+          
+          <Section header='Last Transaction'>
+              <Box sx={{width:"100%",height:"200px",backgroundColor:"#FFF",borderRadius:"20px",overflow:"scroll",padding:"20px 0"}}> 
+                      {filterTransactions(transactions).map((transaction)=>(
+                        <TransactionAccount transaction={transaction}></TransactionAccount>
+                      ))}
+              </Box>
+          </Section>
 
         </Grid>
 
         <Grid item xs={10.5} md={4.5} lg={3}>
             <CardsContainer currentSlider={currentSlider} setCurrentSlider={setCurrentSlider}></CardsContainer>
             
+
+        </Grid>
+
+        <Grid item xs={12} md={9} sx={{height:"380px"}}>
+          
+          <AccountsChart transactions={filterTransactions(transactions)}></AccountsChart>
+
+        </Grid>
+        <Grid item xs={3}>
+          <Section header='Invoices Sent'>
+            <Box >
+              
+            </Box>
+
+
+          </Section>
 
         </Grid>
 
