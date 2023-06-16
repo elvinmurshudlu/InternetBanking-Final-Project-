@@ -11,16 +11,12 @@ declare module '@mui/material/Typography' {
 export const cardTheme = createTheme({
     components:{
         MuiTypography:{
-            styleOverrides:{
-                root:{
-                    color:"black"
-                }
-            },
+            
             variants:[
                 {
                     props:{variant:"card-header"},
                     style:{
-                        fontSize:"18px",
+                        fontSize:"12px",
                         color:"#B3AAE4"
                     }
                 }

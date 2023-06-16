@@ -13,8 +13,8 @@ import { deepPurple } from '@mui/material/colors'
 
 
 
-export default function CardsContainer({arrowControl=true}:{arrowControl?:boolean}) {
-  const [ currentSlider , setCurrentSlider ] = useState(0)
+export default function CardsContainer({arrowControl=true,currentSlider,setCurrentSlider}:{arrowControl?:boolean,currentSlider:number,setCurrentSlider:any}) {
+  // const [ currentSlider , setCurrentSlider ] = useState(0)
 
   const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
 
@@ -30,25 +30,25 @@ export default function CardsContainer({arrowControl=true}:{arrowControl?:boolea
 
   return (
 
-    <Box sx={{width:"100%",height:"280px",}}>
+    <Box sx={{width:"100%"}}>
       <Typography variant="h6">My Cards</Typography>
-        <Box sx={{width:"100%",height:"80%",position:"relative",overflow:"hidden"}}>
+        <Box sx={{width:"100%",height:"200px",position:"relative",overflow:"hidden"}}>
           {
             cards  && cards.map((card:ICard,index:number)=>(
 
                   <Box 
                   onClick={()=>setCurrentSlider(index)}
                   
-                  sx={{
-                    height:"100%",
-                    position:"absolute",
-                    top:"0",
-                    left:'0',
-                    padding:"20px 0",
-                    transform: `translateX(${(index - currentSlider)*105}%)`,
-                    transition:"0.5s",
+                      sx={{
+                        height:"100%",
+                        position:"absolute",
+                        top:"0",
+                        left:'0',
+                        padding:"10px 0",
+                        transform: `translateX(${(index - currentSlider)*105}%)`,
+                        transition:"0.5s",
 
-                  }}>
+                      }}>
                         <Card  selected={currentSlider === index} key={index} cardInformation={card}></Card>
 
                   </Box>
@@ -57,7 +57,7 @@ export default function CardsContainer({arrowControl=true}:{arrowControl?:boolea
         </Box>
         
         {
-          arrowControl && <Box  sx={{width:"100%",height:"5%",padding:"0 20px",display:"flex",justifyContent:"space-between"}}>
+          arrowControl && <Box  sx={{width:"100%",height:"20px",padding:"0 20px",display:"flex",justifyContent:"space-between"}}>
           <IconButton size='large' onClick={()=>changeCard(1)}><ArrowBackIosNew fontSize='small'></ArrowBackIosNew></IconButton>
 
           <Box>{

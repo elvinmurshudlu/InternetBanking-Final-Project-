@@ -5,7 +5,7 @@ import CardsContainer from '../../container/CardsContainer/CardsContainer'
 export default function Cards() {
   return (
     <Box sx={{width:"100%"}}>
-        <CardsContainer></CardsContainer>
+        {/* <CardsContainer></CardsContainer> */}
     </Box>
   )
 }

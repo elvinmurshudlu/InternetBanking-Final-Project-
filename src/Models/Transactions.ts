@@ -9,4 +9,5 @@ export interface ITransactions{
     createdAt: string
     updatedAt: string
     notification:boolean
+    ownerCard:string
 }

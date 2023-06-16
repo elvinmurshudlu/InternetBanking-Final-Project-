@@ -9,7 +9,7 @@ import {
 } from "@mui/material"
 import getSymbolFromCurrency from "currency-symbol-map"
 import { ITransactions } from "../../Models/Transactions"
-import { current } from "@reduxjs/toolkit"
+import {amount} from "../../utils/functions"
 
 export default function TransactionListItem({
   transaction,
@@ -30,21 +30,7 @@ export default function TransactionListItem({
     return ` ${cardNumber.toString().slice(0, 4)} **** **** ${cardNumber.toString().slice(12, 16)}`
   }
 
-  function amount(amount: string, currency: string) {
-    let result = ""
-    if (+amount < 0) {
-      result += "-"
-    }else{
-      result += "+"
 
-    }
-
-    result +=
-      getSymbolFromCurrency(currency) +
-      (amount > "0" ? +amount : -amount).toLocaleString()
-
-    return result
-  }
 
   function download(event:any){
     
@@ -60,36 +46,38 @@ export default function TransactionListItem({
         sx={{ height: 70, color: "#505887", display: "flex", flexWrap: "wrap" }}
       >
         <Grid container>
-          <Grid item xs={2}>
+          <Grid item xs={6} md={2}>
             <ListItemAvatar></ListItemAvatar>
             <ListItemText>
               {transaction.connectedUser}
-              <ListItemText primaryTypographyProps={{ fontSize: "11px" }}>
+              <ListItemText sx={{display:{xs:"block",md:"none"}}} primaryTypographyProps={{ fontSize: "11px" }}>
+              {convertTime(transaction.createdAt)}
+
               </ListItemText>
             </ListItemText>
           </Grid>
           {/*  */}
 
-          <Grid item xs={1.5}>
+          <Grid item xs={1.5} sx={{display:{xs:"none",md:"block"}}}>
             <ListItemText primaryTypographyProps={{ fontSize: "14px" }}>
               #{transaction.id}
             </ListItemText>
           </Grid>
           {/*  */}
-          <Grid item xs={1.5}>
+          <Grid item xs={1.5} sx={{display:{xs:"none",md:"block"}}}>
             <ListItemText primaryTypographyProps={{ fontSize: "14px" }}>
               {transaction.type}
             </ListItemText>
           </Grid>
           {/*  */}
 
-          <Grid item xs={2}>
+          <Grid item xs={2} sx={{display:{xs:"none",md:"block"}}}>
             <ListItemText primaryTypographyProps={{ fontSize: "14px" }}>
               {cardContent(transaction.connectedCard)}
             </ListItemText>
           </Grid>
           {/*  */}
-          <Grid item xs={2}>
+          <Grid item xs={2} sx={{display:{xs:"none",md:"block"}}}>
             <ListItemText primaryTypographyProps={{ fontSize: "14px" }}>
               {convertTime(transaction.createdAt)}
             </ListItemText>
@@ -98,7 +86,7 @@ export default function TransactionListItem({
 
           
 
-          <Grid item xs={1} sx={{ textAlign: "start" }}>
+          <Grid item xs={6} md={1} sx={{ textAlign: {xs:"end",md:"start"} }}>
             <ListItemText sx={{color:+transaction.amount<0 ? "#FE5C73" : "#16DBAA"}}>
               {amount(transaction.amount, transaction.currency)}
             </ListItemText>
@@ -106,7 +94,7 @@ export default function TransactionListItem({
 
 
           {/*  */}
-           <Grid item xs={1.5} sx={{ textAlign: "center" }}>
+           <Grid item xs={1.5} sx={{ textAlign: "center",display:{xs:"none",md:"block"} }}>
             <ListItemText>
               <ListItemIcon></ListItemIcon>
               <Chip onClick={download} label="Download" ></Chip>
