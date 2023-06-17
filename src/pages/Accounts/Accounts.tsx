@@ -18,13 +18,11 @@ export default function Accounts() {
   const [currentSlider , setCurrentSlider] = useState(0)
 
   const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
-  console.log(cards,"+++++++++++++++++");
 
   const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
 
 
   const [chip,setChip] = useState<IChip[]|null>(null)
-
 
 
   function sumIncome(data:ITransactions[]){
@@ -84,7 +82,7 @@ export default function Accounts() {
     let result = [] as ITransactions[]
 
     if(cards.length && transactions.length){
-      for(let a = 0 ; a<datas.length;a++){
+      for(let a = datas.length-1 ; a>=0;a--){
         if(datas[a].ownerCard === cards[currentSlider].cardNumber){
           result.push(datas[a])
         }
@@ -119,8 +117,13 @@ export default function Accounts() {
              </Grid>
             
         </Grid>
+        <Grid item xs={10.5} md={4.5} lg={3}>
+            <CardsContainer currentSlider={currentSlider} setCurrentSlider={setCurrentSlider}></CardsContainer>
+            
 
-        <Grid item xs={12} md={7.5} lg={9} sx={{padding:"0 20px 0 0"}}>
+        </Grid>
+
+        <Grid item xs={12} md={7.5} lg={9} sx={{padding:"0 0 0 20px"}}>
           
           <Section header='Last Transaction'>
               <Box sx={{width:"100%",height:"300px",backgroundColor:"#FFF",borderRadius:"20px",overflow:"scroll",padding:"20px 0"}}> 
@@ -132,11 +135,7 @@ export default function Accounts() {
 
         </Grid>
 
-        <Grid item xs={10.5} md={4.5} lg={3}>
-            <CardsContainer currentSlider={currentSlider} setCurrentSlider={setCurrentSlider}></CardsContainer>
-            
-
-        </Grid>
+        
 
         <Grid item xs={12} md={6} sx={{height:"380px"}}>
           

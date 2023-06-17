@@ -15,7 +15,8 @@ export class FetchData {
   static async quickTransfer(
     fromCardNumber: string,
     toCardNumber: string,
-    amount: string
+    amount: string,
+    cardHolder:string
   ) {
     const cookie = document.cookie.split("=")[1]
 
@@ -25,7 +26,7 @@ export class FetchData {
 
     return await axios.post(
       `${server + serverPort + serverUrls.quickTransfer}`,
-      { fromCardNumber, toCardNumber, amount },
+      { fromCardNumber, toCardNumber, amount,cardHolder },
       {
         headers: {
           Authorization: cookie,

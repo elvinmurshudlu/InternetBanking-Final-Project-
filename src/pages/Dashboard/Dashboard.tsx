@@ -19,10 +19,7 @@ export default function Dashboard() {
 
       </Grid>
 
-      <Grid item xs={12} md={3}>
-        <QuickTransfer></QuickTransfer>
-
-      </Grid>
+      
 
       <Grid item xs={12} md={6}>
           <AccountsChart header='Weekly activity' transactions={transactions}></AccountsChart>
@@ -30,7 +27,10 @@ export default function Dashboard() {
 
       </Grid>
       
-      
+      <Grid item xs={12} md={3}>
+        <QuickTransfer></QuickTransfer>
+
+      </Grid>
 
     </Grid>
   )

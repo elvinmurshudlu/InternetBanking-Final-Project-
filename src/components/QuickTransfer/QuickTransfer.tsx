@@ -40,7 +40,8 @@ export default function QuickTransfer() {
         await FetchData.quickTransfer(
           cards[currentCard].cardNumber,
           targeCard,
-          amount
+          amount,
+          cardHolder
         )
         handleClose(true)
       } catch {}
@@ -191,9 +192,9 @@ export default function QuickTransfer() {
           >
             {cards.length > 0 &&
               cards.map((card, index) => (
-                <MenuItem value={index}>
-                  {cardNumberUI(card.cardNumber)}
-                </MenuItem>
+                card.isAvailable && <MenuItem value={index}>
+                {cardNumberUI(card.cardNumber)}
+              </MenuItem>
               ))}
           </Select>
         </FormControl>
