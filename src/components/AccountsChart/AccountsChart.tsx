@@ -40,7 +40,7 @@ const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturda
  
   
 
-export default function AccountsChart({transactions}:{transactions:ITransactions[]}) {
+export default function AccountsChart({transactions,header}:{transactions:ITransactions[],header:string}) {
 
     let expense = [] as number[]
     let income = [] as number[]
@@ -87,7 +87,7 @@ export default function AccountsChart({transactions}:{transactions:ITransactions
         ],
       };
   return (
-    <Section header='Debit & Credit Overview' height='360px' >
+    <Section header={header} height='360px' >
             <Bar  options={options} data={data} />
     </Section>
   )

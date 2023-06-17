@@ -8,6 +8,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import Cards from "../pages/Cards/Cards"
 import Transactions from "../pages/Transactions/Transactions"
 import Accounts from "../pages/Accounts/Accounts"
+import Dashboard from "../pages/Dashboard/Dashboard"
+import SettingsPage from "../pages/Settings/SettingsPage"
 
 
 
@@ -17,10 +19,7 @@ export const routes = createBrowserRouter([
             element:<MainLayout></MainLayout>,
             children:[{
                 path:ROUTES.BASEURL,
-                element:<div>Dashboard
-
-                    <DashboardIcon color="primary"/>
-                </div>
+                element:<Dashboard></Dashboard>
                 
             }
             ,
@@ -66,6 +65,10 @@ export const routes = createBrowserRouter([
                 
             }
             ,
+            {
+                path:ROUTES.SETTINGS,
+                element:<SettingsPage></SettingsPage>
+            }
         ]
     },
 

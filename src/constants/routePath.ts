@@ -8,5 +8,6 @@ export const ROUTES = {
     INVESMENTS:"/invesments",
     LOANS:"/loans",
     SERVICES:"/services",
-    PRIVILAGES:"/my-privilages"
+    PRIVILAGES:"/my-privilages",
+    SETTINGS:"/settings"
 }

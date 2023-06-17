@@ -27,6 +27,8 @@ export default function QuickTransfer() {
 
   const [targeCard, setTargetCard] = useState<string>("")
 
+  const [cardHolder,setCardHolder] = useState("")
+
   function handleChange(e: any) {
     setCurrentCard(e.target.value)
   }
@@ -77,10 +79,11 @@ export default function QuickTransfer() {
     selected: false,
     target: false,
     amount: false,
+    cardHolder:false
   })
 
   function validation() {
-    const result = { selected: false, target: false, amount: false }
+    const result = { selected: false, target: false, amount: false ,cardHolder:false}
 
     let acc = true
 
@@ -96,6 +99,15 @@ export default function QuickTransfer() {
       acc = false
     } else {
       result.amount = false
+    }
+
+    if(cardHolder.trim()===""){
+      result.cardHolder = true
+      acc = false
+
+    }else{
+      result.cardHolder = false
+
     }
 
     setErrors(result)
@@ -131,15 +143,15 @@ export default function QuickTransfer() {
       sx={{
         width: "100%",
         padding: "15px",
-        backgroundColor: `rgba(81,45,168,0.6)`,
+        backgroundColor: `#FFF`,
         borderRadius: "15px",
         display: "flex",
         flexDirection: "column",
         rowGap: "15px",
-        color: "white",
+        color: "black",
       }}
     >
-      <Typography variant="h5" gutterBottom>
+      {/* <Typography variant="h5" gutterBottom>
         My Wallet
       </Typography>
       <Box
@@ -156,8 +168,8 @@ export default function QuickTransfer() {
             color={blue["A700"]}
           ></Card>
         )}
-      </Box>
-      <Typography variant="h6" gutterBottom>
+      </Box> */}
+      <Typography variant="h6" >
         Quick Transfer
       </Typography>
 
@@ -168,12 +180,14 @@ export default function QuickTransfer() {
             marginBottom: "10px",
           }}
         >
-          <InputLabel id="cards-title">Select your card</InputLabel>
+          <InputLabel size="small" id="cards-title">Select your card</InputLabel>
           <Select
             labelId="cards-title"
             label="Select your card"
             onChange={(e) => handleChange(e)}
             error={errors.selected}
+            size="small"
+
           >
             {cards.length > 0 &&
               cards.map((card, index) => (
@@ -194,6 +208,24 @@ export default function QuickTransfer() {
             onChange={(e) => filterTargetCard(e.target.value)}
             label="Card Number"
             error={errors.target}
+            size="small"
+
+          ></TextField>
+        </FormControl>
+
+        <FormControl
+          fullWidth
+          sx={{
+            marginBottom: "10px",
+          }}
+        >
+          <TextField
+            value={cardHolder}
+            onChange={(e) => setCardHolder(e.target.value)}
+            label="Card Holder"
+            error={errors.target}
+            size="small"
+
           ></TextField>
         </FormControl>
 
@@ -208,6 +240,7 @@ export default function QuickTransfer() {
             onChange={(e) => amountFilter(e.target.value)}
             label="Amount"
             error={errors.amount}
+            size="small"
           ></TextField>
         </FormControl>
         <Button

@@ -4,8 +4,6 @@ export interface ICardProps{
     color?:string
 }
 
-
-
 export interface ICard{
     id:number,
     cardNumber:string,
@@ -23,3 +21,18 @@ export interface ICard{
     createdAt:string,
     updatedAt:string
 }
+
+export interface ICardDetail{
+    cardNumber:string,
+    cardHolder:string,
+    cvv:string,
+    date:any
+  }
+  
+  export interface IDetailError{
+    cardNumber:boolean,
+    cardHolder:boolean,
+    cvv:boolean,
+    date:boolean
+  }
+  

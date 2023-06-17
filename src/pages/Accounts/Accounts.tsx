@@ -106,7 +106,7 @@ export default function Accounts() {
 
 
   return (
-    <Grid container rowSpacing={2}>
+    <Grid container rowSpacing={2} sx={{justifyContent:"space-between"}}>
         <Grid item xs={12} sx={{display:"flex"}}>
              <Grid container spacing={2}>
                 {chip && chip.map((ch)=>(
@@ -123,7 +123,7 @@ export default function Accounts() {
         <Grid item xs={12} md={7.5} lg={9} sx={{padding:"0 20px 0 0"}}>
           
           <Section header='Last Transaction'>
-              <Box sx={{width:"100%",height:"200px",backgroundColor:"#FFF",borderRadius:"20px",overflow:"scroll",padding:"20px 0"}}> 
+              <Box sx={{width:"100%",height:"300px",backgroundColor:"#FFF",borderRadius:"20px",overflow:"scroll",padding:"20px 0"}}> 
                       {filterTransactions(transactions).map((transaction)=>(
                         <TransactionAccount transaction={transaction}></TransactionAccount>
                       ))}
@@ -138,12 +138,12 @@ export default function Accounts() {
 
         </Grid>
 
-        <Grid item xs={12} md={9} sx={{height:"380px"}}>
+        <Grid item xs={12} md={6} sx={{height:"380px"}}>
           
-          <AccountsChart transactions={filterTransactions(transactions)}></AccountsChart>
+          <AccountsChart  header='Debit & Credit Overview' transactions={filterTransactions(transactions)}></AccountsChart>
 
         </Grid>
-        <Grid item xs={3}>
+        {/* <Grid item xs={3}>
           <Section header='Invoices Sent'>
             <Box >
               
@@ -152,7 +152,7 @@ export default function Accounts() {
 
           </Section>
 
-        </Grid>
+        </Grid> */}
 
     </Grid>
   )

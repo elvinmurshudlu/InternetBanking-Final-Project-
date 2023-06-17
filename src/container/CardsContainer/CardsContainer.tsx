@@ -9,11 +9,14 @@ import CircleIcon from '@mui/icons-material/Circle';
 
 import {ArrowBackIosNew,ArrowForwardIos} from '@mui/icons-material';
 import { deepPurple } from '@mui/material/colors'
+import { Button } from '@mui/material'
+import {Link} from "react-router-dom"
+import { ROUTES } from '../../constants/routePath'
 
 
 
 
-export default function CardsContainer({arrowControl=true,currentSlider,setCurrentSlider}:{arrowControl?:boolean,currentSlider:number,setCurrentSlider:any}) {
+export default function CardsContainer({arrowControl=true,currentSlider,setCurrentSlider,router=false}:{arrowControl?:boolean,currentSlider:number,setCurrentSlider:any,router?:boolean}) {
   // const [ currentSlider , setCurrentSlider ] = useState(0)
 
   const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
@@ -31,7 +34,7 @@ export default function CardsContainer({arrowControl=true,currentSlider,setCurre
   return (
 
     <Box sx={{width:"100%"}}>
-      <Typography variant="h6">My Cards</Typography>
+      <Typography variant="h6" sx={{display:"flex",justifyContent:"space-between"}}>My Cards {router && <Button component={Link} to={ROUTES.ACCOUNT} >See details</Button>} </Typography>
         <Box sx={{width:"100%",height:"200px",position:"relative",overflow:"hidden"}}>
           {
             cards  && cards.map((card:ICard,index:number)=>(
@@ -58,7 +61,7 @@ export default function CardsContainer({arrowControl=true,currentSlider,setCurre
         
         {
           arrowControl && <Box  sx={{width:"100%",height:"20px",padding:"0 20px",display:"flex",justifyContent:"space-between"}}>
-          <IconButton size='large' onClick={()=>changeCard(1)}><ArrowBackIosNew fontSize='small'></ArrowBackIosNew></IconButton>
+          <IconButton size='large' onClick={()=>changeCard(-1)}><ArrowBackIosNew fontSize='small'></ArrowBackIosNew></IconButton>
 
           <Box>{
             cards && cards.map((card:ICard,index:number)=>(
@@ -67,7 +70,7 @@ export default function CardsContainer({arrowControl=true,currentSlider,setCurre
             
             }</Box>
 
-          <IconButton onClick={()=>changeCard(-1)} size='large'  ><ArrowForwardIos fontSize='small'></ArrowForwardIos></IconButton>
+          <IconButton onClick={()=>changeCard(1)} size='large'  ><ArrowForwardIos fontSize='small'></ArrowForwardIos></IconButton>
         </Box>
         }
     </Box>

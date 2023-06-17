@@ -88,9 +88,9 @@ export default function Transactions() {
 
   return (
     
-    <Grid container sx={{width:"100%",padding:" 0 ",height:"100%"}}>
+    <Grid container  sx={{width:"100%",padding:" 0 ",height:"100%",justifyContent:"space-between"}}>
 
-          <Grid item xs={12} md={8} sx={{padding:"0"}}>
+          <Grid item xs={12} md={7} sx={{padding:"0"}}>
             <CardsContainer currentSlider={currentSlider} setCurrentSlider={setCurrentSlider}></CardsContainer>
           </Grid>
 
@@ -131,8 +131,8 @@ export default function Transactions() {
 
           {/* <Grid item xs={12}>
             <QuickTransfer></QuickTransfer>
-          </Grid>
-           */}
+          </Grid> */}
+          
           
           
           

@@ -13,4 +13,6 @@ export const serverUrls = {
   isLogged: "/logged",
   getCards: "/getCards",
   quickTransfer: "/transferMoney",
+  addCard:"/addNewCard",
+  cardAvailability:"/setCardUsage"
 }

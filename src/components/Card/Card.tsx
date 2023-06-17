@@ -16,7 +16,7 @@ export default function Card({ cardInformation, selected, color }: ICardProps) {
           maxWidth:"360px",
           transition:"0.1s",
           height: "100%",
-          background: selected ? "linear-gradient(#FFAA07,#D99D2A)" : `#FFF`,
+          background: !cardInformation.isAvailable ? "grey" :  selected ? "linear-gradient(#FFAA07,#D99D2A)" : `#FFF`,
           // background:"transparent",
           borderRadius: "15px",
           padding: "10px 20px",
