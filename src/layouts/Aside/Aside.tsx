@@ -1,18 +1,13 @@
-import {useState} from 'react'
 
 import {
   Avatar,
   Box,
-  Button,
   List,
   ListItem,
   ListItemButton,
-  ListItemButtonProps,
   ListItemIcon,
   ListItemText,
-  ThemeProvider,
   Typography,
-  createTheme,
 } from "@mui/material";
 
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
@@ -54,18 +49,18 @@ export default function Aside() {
     >
 
         <Typography sx={{display:"flex",alignItems:"center",fontSize:"30px",color:"#343C6A",columnGap:"20px"}}>
-            <Avatar variant="square" sx={{borderRadius:"10px",bgcolor:deepPurple["700"]}}>
-              <AccountBalanceIcon></AccountBalanceIcon>
+            <Avatar variant="square" sx={{borderRadius:"10px",backgroundColor:"#FFF"}}>
+              <img src="./icons/Logo.svg" alt="" />
             </Avatar>
 
-            Banking
+            softbank
 
         </Typography>
 
 
 
 
-      <List sx={{ width: "100%" }}>
+      <List sx={{ width: "100%",padding:"0 10px" }}>
         {lists.map((list, index) => (
           <ListItem key={index} sx={{ paddingTop: 0, paddingBottom: 0 }}>
             <ListItemButton

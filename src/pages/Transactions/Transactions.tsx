@@ -131,8 +131,8 @@ export default function Transactions() {
 
           {/* <Grid item xs={12}>
             <QuickTransfer></QuickTransfer>
-          </Grid> */}
-          
+          </Grid>
+           */}
           
           
           
