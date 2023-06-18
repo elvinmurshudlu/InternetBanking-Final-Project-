@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {useState} from "react"
+import EditProfile from '../../components/TabPanels/EditProfile';
 
 
 interface TabPanelProps {
@@ -50,7 +51,7 @@ export default function SettingsPage() {
       </Tabs>
     </Box>
     <TabPanel value={value} index={0}>
-      Edit profile
+      <EditProfile></EditProfile>
     </TabPanel>
     <TabPanel value={value} index={1}>
       Security

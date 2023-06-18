@@ -184,6 +184,7 @@ export default function Cards() {
                 <FormControl fullWidth>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
+                    sx={{padding:"0",height:"10px",fontSize:"10px"}}
                       value={cardDetails.date}
                       onChange={(value: any) => fillData("date", value)}
                     />
