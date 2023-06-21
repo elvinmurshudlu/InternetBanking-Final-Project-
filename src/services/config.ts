@@ -1,5 +1,5 @@
-export const serverIp = "192.168.0.101"
-// export const serverIp = "192.168.42.196"
+// export const serverIp = "192.168.0.101"
+export const serverIp = "192.168.42.195"
 
 export const server = `http://${serverIp}`
 
@@ -14,5 +14,7 @@ export const serverUrls = {
   getCards: "/getCards",
   quickTransfer: "/transferMoney",
   addCard:"/addNewCard",
-  cardAvailability:"/setCardUsage"
+  cardAvailability:"/setCardUsage",
+  getUserDetails:"/userDetails",
+  changeDetails:"/changeDetails"
 }

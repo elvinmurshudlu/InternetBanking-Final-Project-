@@ -69,7 +69,8 @@ export default function Transactions() {
 
           if(+data[a].amount <0){
             let date = new Date(data[a].createdAt)
-            result[date.getDay()]["expense"] += Math.abs(+data[a].amount)
+            console.log(date.getDay(),"============");
+            result[date.getDay()-1]["expense"] += Math.abs(+data[a].amount)
           }
 
         }

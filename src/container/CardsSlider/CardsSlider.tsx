@@ -16,10 +16,11 @@ import { ROUTES } from '../../constants/routePath'
 
 
 
-export default function CardsContainer({arrowControl=true,currentSlider,setCurrentSlider,router=false}:{arrowControl?:boolean,currentSlider:number,setCurrentSlider:any,router?:boolean}) {
+export default function CardsSlider({arrowControl=true,currentSlider,setCurrentSlider,router=false}:{arrowControl?:boolean,currentSlider:number,setCurrentSlider:any,router?:boolean}) {
   // const [ currentSlider , setCurrentSlider ] = useState(0)
 
   const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
+  
 
 
   function changeCard(val:number){
@@ -48,11 +49,8 @@ export default function CardsContainer({arrowControl=true,currentSlider,setCurre
                         top:"0",
                         left:'0',
                         padding:"10px 0",
-                        transform: `translateX(${(index - currentSlider <0 ? cards.length+index-currentSlider : index - currentSlider )*105}%)`,
-                        // transform: `translateX(${((index - currentSlider + cards.length)%cards.length  )*105}%)`,
-                        transition:"0.5s ease-in-out",
-                        zIndex:index === currentSlider ? 0 :3,
-                        
+                        transform: `translateX(${(index - currentSlider <0 ? cards.length+index-currentSlider :index - currentSlider )*105}%)`,
+                        transition:cards.length+index-currentSlider+1===cards.length ? "0s" :"0.5s",
 
                       }}>
                         <Card  selected={currentSlider === index} key={index} cardInformation={card}></Card>

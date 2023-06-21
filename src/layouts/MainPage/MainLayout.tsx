@@ -63,15 +63,11 @@ export default function MainLayout() {
               data.data.notification && handleClose(true)
           
         }
-        // else if(data.type == "transaction_updated"){
-        //   dispatch(setTransactions(data.data))
-
-        // }
+      
         
         else{
           dispatch(setTransactions(data))
         }
-        // console.log(JSON.stringify(data[0]))
       });
   
       newSocket.addEventListener('close', () => {

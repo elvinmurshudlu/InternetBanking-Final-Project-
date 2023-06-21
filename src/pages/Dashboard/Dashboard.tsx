@@ -7,9 +7,12 @@ import { RootState } from '../../store/store'
 import AccountsChart from '../../components/AccountsChart/AccountsChart'
 import QuickTransfer from '../../components/QuickTransfer/QuickTransfer'
 import CreditChart from '../../components/CreditCardChart/CreditChart'
+import CardsSlider from '../../container/CardsSlider/CardsSlider'
 
 export default function Dashboard() {
   const [current,setCurrent] = useState(0)
+
+  
 
   const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
 
@@ -21,6 +24,10 @@ export default function Dashboard() {
         <CardsContainer router={true} currentSlider={current} setCurrentSlider={setCurrent}></CardsContainer>
 
       </Grid>
+
+      {/* <Grid xs={12}>
+        <CardsSlider currentSlider={current} setCurrentSlider={setCurrent}></CardsSlider>
+      </Grid> */}
 
       <Grid item xs={12} md={3}>
         <CreditChart cards={cards} transactions={transactions}></CreditChart>

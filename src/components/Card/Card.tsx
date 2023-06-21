@@ -17,15 +17,13 @@ export default function Card({ cardInformation, selected, color }: ICardProps) {
           transition:"0.1s",
           height: "100%",
           background: !cardInformation.isAvailable ? "grey" :  selected ? "linear-gradient(#FFAA07,#D99D2A)" : `#FFF`,
-          // background:"transparent",
           borderRadius: "15px",
           padding: "10px 20px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
           cursor: "pointer",
-          color:selected ? "white" :"black"
-          // border: selected ? `2px solid ${deepPurple["900"]}` : "none",
+          color:selected ? "white" :"black",
         }}
       >
         <Box sx={{ width: "100%", position: "relative",display:"flex",justifyContent:"space-between" }}>
