@@ -21,30 +21,25 @@ export default function EditProfile() {
   const [changeUserDetail ] = useChangeUserDetailsMutation()
 
 
+  const [profPic,setProfPic] = useState<any>()
 
   function handleProfPic(event: any) {
+
     const data = event.target.files[0]
-    // const reader = new FileReader();
 
-    // reader.onload = () => {
-    //   const image = reader.result;
-    //   setUserCredentials((user)=>({...user,["profilePicture"]:image}))
-    // };
+    const reader = new FileReader();
 
-    // if (data) {
-    //   reader.readAsDataURL(data);
-    //  }
+    reader.onload = () => {
+      const image = reader.result;
+      setProfPic(image)
+    };
 
+    if (data) {
+      reader.readAsDataURL(data);
+     }
+    
      setUserCredentials((user)=>({...user,["profilePicture"]:data}))
-
-
-    
-
-    
-
-
-
-  }
+      }
 
 
   async function submit(e: any) {
@@ -61,28 +56,25 @@ export default function EditProfile() {
           }
         })
         refetch()
-      } catch (ex) {
-        console.log(ex)
+      } catch  {
       }
     }
 
     const {profilePicture,...rest} = userCredentials
 
-    await changeUserDetail(rest)
-    setUserCredentials({})
-    refetch()
+        await changeUserDetail(rest)
+        setUserCredentials({})
+        refetch()
   }
 
   function handleChange(key: string, value: string) {
-
-
-
     setUserCredentials((detail) => ({ ...detail, [key]: value }))
   }
 
   if (isLoading) {
     return <div>Loading</div>
   }
+
 
   return (
     <Grid
@@ -93,7 +85,7 @@ export default function EditProfile() {
     >
       <Grid item xs={12} md={2}>
         <Avatar
-          src={  `${server+serverPort}/api/images/${data?.profilePicture}`}
+          src={profPic ? profPic : `${server+serverPort}/api/images/${data?.profilePicture}`}
           sx={{ width: 124, height: 124 }}
         ></Avatar>
         {/* <label htmlFor="file">Change Profile</label> */}
