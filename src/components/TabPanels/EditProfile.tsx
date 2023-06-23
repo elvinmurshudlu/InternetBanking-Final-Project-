@@ -11,6 +11,8 @@ import dayjs from "dayjs"
 import axios from "axios"
 import { server, serverPort } from "../../services/config"
 
+import Skeleton from '@mui/material/Skeleton';
+
 export default function EditProfile() {
 
   const { data, isLoading, refetch } = useGetUserDetailsQuery("")
@@ -61,7 +63,6 @@ export default function EditProfile() {
     }
 
     const {profilePicture,...rest} = userCredentials
-
         await changeUserDetail(rest)
         setUserCredentials({})
         refetch()
@@ -71,9 +72,9 @@ export default function EditProfile() {
     setUserCredentials((detail) => ({ ...detail, [key]: value }))
   }
 
-  if (isLoading) {
-    return <div>Loading</div>
-  }
+  // if (isLoading) {
+  //   return <Skeleton variant="circular"/>
+  // }
 
 
   return (
@@ -83,40 +84,58 @@ export default function EditProfile() {
       rowSpacing={5}
       sx={{ justifyContent: "space-between", padding: "0 35px 0 0" }}
     >
-      <Grid item xs={12} md={2}>
-        <Avatar
-          src={profPic ? profPic : `${server+serverPort}/api/images/${data?.profilePicture}`}
-          sx={{ width: 124, height: 124 }}
-        ></Avatar>
-        {/* <label htmlFor="file">Change Profile</label> */}
-        <Button component="label" htmlFor="file">
-          Change profile
-        </Button>
-        <input
-          onChange={handleProfPic}
-          id="file"
-          type="file"
-          style={{ display: "none" }}
-        ></input>
-        {/* <Button onClick={sendPicture}>Send Picture</Button> */}
+      <Grid item xs={12} md={2} sx={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+            <Avatar
+              src={profPic ? profPic : `${server+serverPort}/api/images/${data?.profilePicture}`}
+              sx={{ width: 124, height: 124 }}
+            ></Avatar>
+            <Button component="label" htmlFor="file">
+              Change profile
+            </Button>
+            <input
+              onChange={handleProfPic}
+              id="file"
+              type="file"
+              style={{ display: "none" }}
+            ></input>
       </Grid>
-      <Grid
-        item
-        xs={12}
-        md={4.5}
-        sx={{ display: "flex", flexDirection: "column", rowGap: "30px" }}
-      >
-        <FormControl fullWidth>
+      
+      
+<Grid item xs={12} md={9} 
+        // sx={{ display: "flex", flexDirection: "column", rowGap: "30px" }}
+
+>
+  <Grid container spacing={3} sx={{display:'flex',justifyContent:"space-between"}}>
+  <Grid item xs={12} md={6}>
+    <FormControl fullWidth>
+            <TextField
+              value={data?.name}
+              sx={{ borderRadius: "20px" }}
+              fullWidth
+              size="small"
+              label="Name"
+              disabled
+            ></TextField>
+          </FormControl>
+
+  </Grid>
+  <Grid item xs={12} md={6}>
+  
+  <FormControl fullWidth>
           <TextField
-            value={data?.name}
             sx={{ borderRadius: "20px" }}
             fullWidth
             size="small"
-            label="Name"
+            value={data?.surname}
+            label="Surname"
             disabled
           ></TextField>
         </FormControl>
-        <FormControl fullWidth>
+
+  </Grid>
+
+  <Grid item xs={12} md={6}>
+  <FormControl fullWidth>
           <TextField
             value={data?.email}
             sx={{ borderRadius: "20px" }}
@@ -127,7 +146,26 @@ export default function EditProfile() {
           ></TextField>
         </FormControl>
 
-        <FormControl fullWidth>
+  </Grid>
+  
+
+  <Grid item xs={12} md={6}>
+  
+  <FormControl fullWidth>
+          <TextField
+            sx={{ borderRadius: "20px" }}
+            fullWidth
+            size="small"
+            value="**********"
+            label="Password"
+            disabled
+          ></TextField>
+        </FormControl>
+
+  </Grid>
+
+  <Grid item xs={12} md={6}>
+  <FormControl fullWidth>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateField
               onChange={(value: any) => handleChange("birth", value)}
@@ -143,7 +181,11 @@ export default function EditProfile() {
           </LocalizationProvider>
         </FormControl>
 
-        <FormControl fullWidth>
+  </Grid>
+
+  <Grid item xs={12} md={6}>
+  
+  <FormControl fullWidth>
           <TextField
             sx={{ borderRadius: "20px" }}
             onChange={(e: any) =>
@@ -160,7 +202,12 @@ export default function EditProfile() {
           ></TextField>
         </FormControl>
 
-        <FormControl fullWidth>
+  </Grid>
+
+
+  <Grid item xs={12} md={6}>
+  
+  <FormControl fullWidth>
           <TextField
             sx={{ borderRadius: "20px" }}
             onChange={(e: any) => handleChange("postalCode", e.target.value)}
@@ -174,36 +221,14 @@ export default function EditProfile() {
             label="Postal Code"
           ></TextField>
         </FormControl>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        md={4.5}
-        rowSpacing={3}
-        sx={{ display: "flex", flexDirection: "column", rowGap: "30px" }}
-      >
-        <FormControl fullWidth>
-          <TextField
-            sx={{ borderRadius: "20px" }}
-            fullWidth
-            size="small"
-            value={data?.surname}
-            label="Surname"
-            disabled
-          ></TextField>
-        </FormControl>
-        <FormControl fullWidth>
-          <TextField
-            sx={{ borderRadius: "20px" }}
-            fullWidth
-            size="small"
-            value="**********"
-            label="Password"
-            disabled
-          ></TextField>
-        </FormControl>
 
-        <FormControl fullWidth>
+  </Grid>
+
+  
+
+  <Grid item xs={12} md={6}>
+  
+  <FormControl fullWidth>
           <TextField
             sx={{ borderRadius: "20px" }}
             fullWidth
@@ -218,7 +243,13 @@ export default function EditProfile() {
           ></TextField>
         </FormControl>
 
-        <FormControl fullWidth>
+  </Grid>
+
+
+
+  <Grid item xs={12} md={6}>
+  
+  <FormControl fullWidth>
           <TextField
             sx={{ borderRadius: "20px" }}
             fullWidth
@@ -233,7 +264,11 @@ export default function EditProfile() {
           ></TextField>
         </FormControl>
 
-        <FormControl fullWidth>
+  </Grid>
+
+  <Grid item xs={12} md={6}>
+  
+  <FormControl fullWidth>
           <TextField
             sx={{ borderRadius: "20px" }}
             fullWidth
@@ -247,7 +282,13 @@ export default function EditProfile() {
             label="Country"
           ></TextField>
         </FormControl>
-      </Grid>
+
+  </Grid>
+
+  </Grid>
+
+</Grid>
+
       <Grid item xs={12} sx={{ textAlign: "end" }}>
         <Button
           sx={{

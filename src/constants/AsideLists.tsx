@@ -6,7 +6,7 @@ import PaidIcon from "@mui/icons-material/Paid";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
-
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const  lists = [
     {
@@ -37,7 +37,7 @@ export const  lists = [
     {
         title: "Settings",
         url: ROUTES.SETTINGS, 
-        icon: <img src="/icons/loan 1.svg"></img>,
+        icon: <SettingsIcon></SettingsIcon>,
       }
     // {
     //   title: "Loans",

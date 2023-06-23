@@ -15,7 +15,6 @@ export const userDetails = createApi({
     }
 
 }),
-    
     endpoints:(builder)=>(
         {
             getUserDetails:builder.query<IUserDetails,string>({
@@ -35,6 +34,7 @@ export const userDetails = createApi({
 
         }
     )
+    
 })
 
 
