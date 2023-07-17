@@ -2,11 +2,18 @@ import { Box, ThemeProvider, Typography } from "@mui/material"
 import {amount} from "../../utils/functions"
 import { ICardProps } from "../../Models/Card"
 import {cardNumber} from "../../utils/functions"
+import {LanguageApi} from "../../contextApi/LanguageContext";
+import {useContext} from "react";
 
-
+import {dictionary} from "../../Language/lang";
 
 
 export default function Card({ cardInformation, selected, color }: ICardProps) {
+
+    const lang = useContext(LanguageApi)
+
+
+
   return (
     // <ThemeProvider theme={cardTheme}>
       <Box
@@ -29,7 +36,7 @@ export default function Card({ cardInformation, selected, color }: ICardProps) {
         <Box sx={{ width: "100%", position: "relative",display:"flex",justifyContent:"space-between" }}>
           <Box >
             <Typography variant="subtitle2" sx={{ padding: "0",fontSize:'12px',fontWeight:"100" }}>
-              Balance
+                {dictionary["Balance"][lang.language]}
             </Typography>
             <Typography variant="h6" sx={{fontSize:"20px"}}>{amount(cardInformation.amount,cardInformation.currency,true)}</Typography>
           </Box>

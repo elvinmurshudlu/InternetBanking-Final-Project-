@@ -14,11 +14,15 @@ import { server, serverIp, serverPort } from "../../services/config"
 import { addTransaction, setTransactions } from "../../features/transactionSlice"
 import { State } from "../../Models/LoginRegister"
 import { Alert, Snackbar } from "@mui/material"
+import { useGetUserCardsQuery } from "../../features/cardDetails"
 
 
 export default function MainLayout() {  
 
   let [isLogged,setIsLogged] = useState(false)
+
+  const {refetch} = useGetUserCardsQuery("")
+
 
   const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
 
@@ -58,7 +62,6 @@ export default function MainLayout() {
         
         const data = JSON.parse(event.data)
         if(data.type ==="transaction_created"){
-              console.log(data);
               dispatch(addTransaction(data.data))
               data.data.notification && handleClose(true)
           
@@ -92,7 +95,8 @@ export default function MainLayout() {
 
   useEffect(()=>{
     if(isLogged){
-      dispatch(fetchCards())
+      refetch()
+      // dispatch(fetchCards())
     }
 
   },[location,isLogged,transactions])

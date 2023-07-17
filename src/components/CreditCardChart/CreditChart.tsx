@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box,Skeleton } from '@mui/material'
 import React from 'react'
 import { ICard } from '../../Models/Card'
 import { ITransactions } from '../../Models/Transactions'
@@ -8,7 +8,7 @@ import { cardNumber } from '../../utils/functions';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function CreditChart({cards,transactions}:{cards:ICard[],transactions:ITransactions[]}) {
+export default function CreditChart({cards,transactions,isLoading}:{cards:ICard[],transactions:ITransactions[],isLoading?:boolean}) {
 
     let cardDetail: { [key: string]: number } = {};
 
@@ -54,6 +54,17 @@ export default function CreditChart({cards,transactions}:{cards:ICard[],transact
         ],
       };
 
+
+      if(isLoading){
+        return (
+          <>
+          <Skeleton variant='text' height={20}></Skeleton>
+          <Skeleton variant='text' height={20}></Skeleton>
+          <Skeleton variant='text' height={20}></Skeleton>
+          <Skeleton variant='rectangular' height={250}></Skeleton>
+          </>
+        )
+      }
 
   return (
     <Box>

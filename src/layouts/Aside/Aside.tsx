@@ -1,4 +1,3 @@
-
 import {
   Avatar,
   Box,
@@ -11,17 +10,24 @@ import {
 } from "@mui/material";
 
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import {dictionary} from "../../Language/lang";
 import { lists} from "../../constants/AsideLists"
 
 import { Link,  useLocation } from "react-router-dom";
 import {  style } from "./Aside.style";
 import { deepPurple } from "@mui/material/colors";
+import {useContext, useEffect} from "react";
+import  {LanguageApi} from "../../contextApi/LanguageContext";
 
 
 
 
 export default function Aside() {
   let location = useLocation();
+
+  const lang = useContext(LanguageApi)
+
+    console.log(lang.language)
 
 
 
@@ -71,7 +77,7 @@ export default function Aside() {
               
             >
               <ListItemIcon >{list.icon}</ListItemIcon>
-              <ListItemText primary={list.title}></ListItemText>
+              <ListItemText primary={dictionary[list.title][lang.language]}></ListItemText>
             </ListItemButton>
           </ListItem>
         ))}

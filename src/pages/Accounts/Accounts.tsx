@@ -1,5 +1,5 @@
 import { Grid,Box,Typography } from '@mui/material'
-import  { useEffect, useState } from 'react'
+import {useContext, useEffect, useState} from 'react'
 import CardsContainer from '../../container/CardsContainer/CardsContainer'
 import Chip from '../../components/Chip/Chip'
 import { useSelector } from 'react-redux'
@@ -10,14 +10,20 @@ import { ICard } from '../../Models/Card'
 import TransactionAccount from '../../components/Transactions/TransactionAccount'
 import Section from '../../container/Section/Section'
 import AccountsChart from '../../components/AccountsChart/AccountsChart'
+import { useGetUserCardsQuery } from '../../features/cardDetails'
 
-
+import {dictionary} from "../../Language/lang";
+import {LanguageApi} from "../../contextApi/LanguageContext";
 
 
 export default function Accounts() {
+
+  const language = useContext(LanguageApi)
   const [currentSlider , setCurrentSlider] = useState(0)
 
-  const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
+  // const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
+
+  const {data:cards=[],isLoading} = useGetUserCardsQuery("")
 
   const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
 
@@ -118,7 +124,7 @@ export default function Accounts() {
             
         </Grid>
         <Grid item xs={10.5} md={4.5} lg={3}>
-            <CardsContainer currentSlider={currentSlider} setCurrentSlider={setCurrentSlider}></CardsContainer>
+            <CardsContainer cards={cards} isLoading={isLoading} currentSlider={currentSlider} setCurrentSlider={setCurrentSlider}></CardsContainer>
             
 
         </Grid>

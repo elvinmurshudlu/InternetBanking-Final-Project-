@@ -4,16 +4,23 @@ import { RootState } from "../../store/store";
 import Trasactions from "../../components/Transactions/TrasactionsLists";
 import { ITransactions } from "../../Models/Transactions";
 import CardsContainer from "../../container/CardsContainer/CardsContainer";
+import {dictionary} from "../../Language/lang";
 
-import {useEffect,useState} from "react"
+import {useContext, useEffect, useState} from "react"
 
 import {ResponsiveBar} from "@nivo/bar"
 import QuickTransfer from "../../components/QuickTransfer/QuickTransfer";
+import { useGetUserCardsQuery } from "../../features/cardDetails";
+import {LanguageApi} from "../../contextApi/LanguageContext";
 
-export default function Transactions() {      
+export default function Transactions() {
+    const language = useContext(LanguageApi);
+
       const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
 
       const [currentSlider , setCurrentSlider] = useState(0)
+
+      const {data:cards=[],isLoading} = useGetUserCardsQuery("")
 
 
       
@@ -34,31 +41,31 @@ export default function Transactions() {
       function dataFilter(data:ITransactions[]){
         let result = [
           {
-            day: "Monday",
+            day: dictionary["Monday"][language.language],
             expense: 0
           },
           {
-            day: "Tuesday",
+            day: dictionary["Tuesday"][language.language],
             expense: 0
           },
           {
-            day: "Wednesday",
+            day: dictionary["Wednesday"][language.language],
             expense: 0
           },
           {
-            day: "Thursday",
+            day: dictionary["Thursday"][language.language],
             expense: 60
           },
           {
-            day: "Friday",
+            day: dictionary["Friday"][language.language],
             expense: 0
           },
           {
-            day: "Saturday",
+            day: dictionary["Saturday"][language.language],
             expense: 0
           },
           {
-            day: "Sunday",
+            day: dictionary["Sunday"][language.language],
             expense: 0
           }
         ]
@@ -69,7 +76,6 @@ export default function Transactions() {
 
           if(+data[a].amount <0){
             let date = new Date(data[a].createdAt)
-            console.log(date.getDay(),"============");
             result[date.getDay()-1]["expense"] += Math.abs(+data[a].amount)
           }
 
@@ -92,47 +98,48 @@ export default function Transactions() {
     <Grid container  sx={{width:"100%",padding:" 0 ",height:"100%",justifyContent:"space-between"}}>
 
           <Grid item xs={12} md={7} sx={{padding:"0"}}>
-            <CardsContainer currentSlider={currentSlider} setCurrentSlider={setCurrentSlider}></CardsContainer>
+            <CardsContainer cards={cards} isLoading={isLoading} currentSlider={currentSlider} setCurrentSlider={setCurrentSlider}></CardsContainer>
           </Grid>
 
           
-          {
-            transactions && <Grid item xs={12} md={4} sx={{padding:"0",height:"230px"}}>
-              <Typography variant="h6">My Expense</Typography>
-            <ResponsiveBar data={dataFilter(transactions)} keys={["expense"]}
-             indexBy="day" 
-             margin={{ top: 20, right: 10, bottom: 20, left: 30 }}
-             padding={0.1}
-             valueScale={{ type: "linear" }}
-             colors="#3182CE"
-             // animate={true}
-             enableLabel={false}
-             axisLeft={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "degrees",
-              legendPosition: "middle",
-              legendOffset: -40
-            }}
-             
-           ></ResponsiveBar>
+          
+            
+           {
+            transactions &&  <Grid item xs={12} md={4} sx={{padding:"0",height:"260px"}}>
+            <Typography variant="h6">{dictionary["My Expense"][language.language]}</Typography>
+          <ResponsiveBar data={dataFilter(transactions)} keys={["expense"]}
+           indexBy="day" 
+           margin={{ top: 30, right: 10, bottom: 55, left: 30 }}
+           padding={0.1}
+           valueScale={{ type: "linear" }}
+           colors="#3182CE"
+           // animate={true}
+           enableLabel={false}
+           axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "degrees",
+            legendPosition: "middle",
+            legendOffset: -40
+          }}
+           
+         ></ResponsiveBar>
 
-     </Grid>
-          }
+   </Grid>
+           }
+          
 
 
                                                   
           <Grid item xs={12}  sx={{height:"60%"}}>
 
-            {transactions && <Trasactions transactions={reverse(transactions)}></Trasactions>}
+            {transactions && <Trasactions isLoading={isLoading} transactions={reverse(transactions)}></Trasactions>}
  
           </Grid> 
 
 
-          {/* <Grid item xs={12}>
-            <QuickTransfer></QuickTransfer>
-          </Grid> */}
+          
           
           
           

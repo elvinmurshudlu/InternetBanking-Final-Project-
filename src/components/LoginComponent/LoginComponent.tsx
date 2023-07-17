@@ -8,16 +8,18 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
-import { useState } from "react";
+import {useContext, useState} from "react";
 import { Authendication } from "../../services/Auth";
 import { useNavigate } from "react-router-dom";
 import { validate } from "../../validation/Validation";
 import { Login, LoginError } from "../../Models/LoginRegister";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
+import {dictionary} from "../../Language/lang";
 
 import {  red } from "@mui/material/colors";
 
 import { Button } from "@mui/material";
+import {LanguageApi} from "../../contextApi/LanguageContext";
 
 export default function LoginComponent() {
   let [userInformation, setUserInformation] = useState<Login>({
@@ -97,6 +99,9 @@ export default function LoginComponent() {
     },
   });
 
+  const language = useContext(LanguageApi)
+
+
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -119,7 +124,7 @@ export default function LoginComponent() {
             label="Email"
           ></TextField>
           {informationErrors.email && (
-            <FormHelperText error>Email unvani daxil edin</FormHelperText>
+            <FormHelperText error>{dictionary["Type email"][language.language]}</FormHelperText>
           )}
         </FormControl>
         <FormControl fullWidth>
@@ -130,7 +135,7 @@ export default function LoginComponent() {
             fullWidth
             type={visibility ? "text" : "password"}
             id="password"
-            label="Password"
+            label={dictionary["Password"][language.language]}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -146,12 +151,12 @@ export default function LoginComponent() {
             }}
           ></TextField>
           {informationErrors.password && (
-            <FormHelperText error>Password daxil edin</FormHelperText>
+            <FormHelperText error>{dictionary["Type password"][language.language]}</FormHelperText>
           )}
 
           {error && (
             <FormHelperText error>
-              Istifadəçi adı və ya şifrə yanlışdır
+              {dictionary["Wrong email or password"][language.language]}
             </FormHelperText>
           )}
         </FormControl>
@@ -167,10 +172,10 @@ export default function LoginComponent() {
           
           // sx={{backgroundColor:theme.palette.primary.dark}}
         >
-          Login
+          {dictionary["Login"][language.language]}
         </Button>
 
-        <span>və ya</span>
+        <span>{dictionary["or"][language.language]}</span>
 
         <Button
           variant="outlined"          
@@ -180,7 +185,7 @@ export default function LoginComponent() {
           onClick={() => navigate("/register")}
           type="submit"
         >
-          Register
+          {dictionary["Register"][language.language]}
         </Button>
       </Box>
     </ThemeProvider>

@@ -1,14 +1,19 @@
 import { List,ListItem, ListItemButton,ListItemIcon ,Typography,TextField } from '@mui/material'
 import { ICard } from '../../Models/Card'
 import DialogModal from '../DialogModal/DialogModal'
-import { useState } from 'react'
+import {useContext, useState} from 'react'
 import { Box } from '@mui/material'
 import { FetchData } from '../../services/UserInformations'
 import { useAppDispatch } from '../../store/store'
 import { fetchCards } from '../../features/cardsSlice'
-
+import { useGetUserCardsQuery } from '../../features/cardDetails'
+import {dictionary} from "../../Language/lang";
+import {LanguageApi} from "../../contextApi/LanguageContext";
 
 export default function Settings({currentCard}:{currentCard:ICard}) {
+    const language = useContext(LanguageApi)
+
+    const {refetch} = useGetUserCardsQuery("")
 
     const [open,setOpen] = useState(false)
 
@@ -16,7 +21,7 @@ export default function Settings({currentCard}:{currentCard:ICard}) {
 
     const [error,setError] = useState(false)
 
-   const dispatch = useAppDispatch()
+  //  const dispatch = useAppDispatch()
 
    async function blockUnBlock(){
         if(password.trim()===""){
@@ -25,7 +30,8 @@ export default function Settings({currentCard}:{currentCard:ICard}) {
         }else{
             try{
                 await FetchData.cardAvailability(currentCard.cardNumber,!currentCard.isAvailable,password)
-                dispatch(fetchCards())
+                // dispatch(fetchCards())
+                refetch()
             }catch{
                 setPassword("")
                 setError(true)
@@ -46,15 +52,15 @@ export default function Settings({currentCard}:{currentCard:ICard}) {
                     <ListItem>
                       <ListItemButton onClick={()=>setOpen(true)}>
                         <ListItemIcon sx={{marginRight:"10px"}}><img src="./icons/BlockCard.svg" alt="" /></ListItemIcon>
-                        <Typography sx={{color:"#505887",fontWeight:"500"}} variant="h6">{currentCard.isAvailable ? "Block" :"UnBlock"}
-                        <Typography sx={{color:"#718EBF",fontWeight:"300"}} variant="subtitle2">Instantly block your card</Typography>
+                        <Typography sx={{color:"#505887",fontWeight:"500"}} variant="h6">{currentCard.isAvailable ? dictionary["Block"][language.language] :dictionary["UnBlock"][language.language]}
+                        <Typography sx={{color:"#718EBF",fontWeight:"300"}} variant="subtitle2">{dictionary["Instantly block your card"][language.language]}</Typography>
                         </Typography>
                        
                       </ListItemButton>
                     </ListItem>
-                    <DialogModal content={currentCard.isAvailable ? "Write your password and agree to block your card" : "Write your password and agree to unblock your card"} open={open} setOpen={setOpen} onSubscribe={blockUnBlock}>
+                    <DialogModal content={dictionary["Confirm block"][language.language]} open={open} setOpen={setOpen} onSubscribe={blockUnBlock}>
                               <Box>
-                                <TextField error={error} value={password} onChange={(e:any)=>setPassword(e.target.value)} fullWidth type='password' label="Your password"></TextField>
+                                <TextField error={error} value={password} onChange={(e:any)=>setPassword(e.target.value)} fullWidth type='password' label={dictionary["Type password"][language.language]}></TextField>
                                 </Box> 
                     </DialogModal>
                 </List>

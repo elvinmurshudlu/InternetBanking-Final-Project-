@@ -4,7 +4,7 @@ import { IUserDetails } from '../Models/UserDetails'
 
 export const userDetails = createApi({
     reducerPath:"userDetails",
-    baseQuery:fetchBaseQuery({baseUrl:`${server+serverPort}`,
+    baseQuery:fetchBaseQuery({baseUrl:`${server}`,
     prepareHeaders:(headers) =>{
         const cookie = document.cookie.split("=")[1]
 
@@ -13,7 +13,6 @@ export const userDetails = createApi({
         return headers;
 
     }
-
 }),
     endpoints:(builder)=>(
         {

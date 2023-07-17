@@ -13,7 +13,7 @@ import {
 } from "@mui/material"
 import { useLocation } from "react-router-dom"
 import SearchIcon from "@mui/icons-material/Search"
-import { useState, useEffect } from "react"
+import {useState, useEffect, useContext} from "react"
 
 import { lists } from "../../constants/AsideLists"
 import { HeaderCurrentPage } from "../../Models/Header"
@@ -22,8 +22,13 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { ITransactions } from "../../Models/Transactions"
 import NotificationBox from "../NotificationBox/NotificationBox"
+import {LanguageApi} from "../../contextApi/LanguageContext";
+import {dictionary} from "../../Language/lang";
 
 export default function Header() {
+
+    const lang = useContext(LanguageApi)
+
   const [currentPage, setCurrentPage] = useState<HeaderCurrentPage>({
     title: "",
     icon: "",
@@ -79,7 +84,8 @@ export default function Header() {
           >
             {currentPage.icon}
           </Avatar>
-          {currentPage.title}
+            {currentPage.title && dictionary[currentPage.title][lang.language]}
+            {/*{currentPage.title}*/}
         </Typography>
 
         <TextField

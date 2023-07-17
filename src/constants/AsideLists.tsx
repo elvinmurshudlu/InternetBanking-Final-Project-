@@ -1,11 +1,4 @@
 import { ROUTES } from "./routePath";
-
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import PaidIcon from "@mui/icons-material/Paid";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
 import SettingsIcon from '@mui/icons-material/Settings';
 
 export const  lists = [

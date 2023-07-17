@@ -1,14 +1,18 @@
 import { CheckBox } from "@mui/icons-material";
 import { Alert, Box, Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Snackbar, SnackbarOrigin, TextField } from "@mui/material";
-import {useState} from "react"
+import {useContext, useState} from "react"
 import { Register, State } from "../../Models/LoginRegister";
 import { validate } from "../../validation/Validation";
 import { Authendication } from "../../services/Auth";
-
-
+import {dictionary} from "../../Language/lang";
+import {LanguageApi} from "../../contextApi/LanguageContext";
+import {Link, useNavigate} from "react-router-dom";
 
 
 export default function RegisterComponent() {
+  const language = useContext(LanguageApi)
+
+  const navigate = useNavigate()
 
   let [credentials,setCredentials] = useState<Register>({"name":"","surname":"","email":"","passwordRegister":"","confirmPassword":""})
 
@@ -107,32 +111,32 @@ export default function RegisterComponent() {
     }}>
 
       <FormControl fullWidth>
-        <TextField error={credentialsError.name} onChange={(e:any)=>fillForm(e)} required size="small" label="Ad" id="name"></TextField>
-        <FormHelperText error>{credentialsError.name && "Ad qeyd edin"}</FormHelperText>
+        <TextField error={credentialsError.name} onChange={(e:any)=>fillForm(e)} required size="small" label={dictionary["Name"][language.language]} id="name"></TextField>
+        <FormHelperText error>{credentialsError.name && dictionary["Type name"][language.language]}</FormHelperText>
       </FormControl>
       
       <FormControl fullWidth>
-        <TextField error={credentialsError.surname} required onChange={(e:any)=>fillForm(e)} size="small" label="Soyad" id="surname"></TextField>
+        <TextField error={credentialsError.surname} required onChange={(e:any)=>fillForm(e)} size="small" label={dictionary["Surname"][language.language]} id="surname"></TextField>
         {/* <FormHelperText error>Ad qeyd edin</FormHelperText> */}
-        <FormHelperText error>{credentialsError.surname && "Soyad qeyd edin"}</FormHelperText>
+        <FormHelperText error>{credentialsError.surname && dictionary["Type surname"][language.language]}</FormHelperText>
 
       </FormControl >
       <FormControl fullWidth>
         <TextField error={credentialsError.email} required size="small" label="Email" onChange={(e:any)=>fillForm(e)} id="email"></TextField>
         {/* <FormHelperText error>Ad qeyd edin</FormHelperText> */}
-        <FormHelperText error>{credentialsError.email && "Email qeyd edin"}</FormHelperText>
+        <FormHelperText error>{credentialsError.email && dictionary["Type email"][language.language]}</FormHelperText>
 
       </FormControl>
       <FormControl fullWidth>
-        <TextField type="password" error={credentialsError.passwordRegister} required size="small" label="Şifrə" onChange={(e:any)=>fillForm(e)} id="passwordRegister"></TextField>
+        <TextField type="password" error={credentialsError.passwordRegister} required size="small" label={dictionary["Password"][language.language]} onChange={(e:any)=>fillForm(e)} id="passwordRegister"></TextField>
         {/* <FormHelperText error>Ad qeyd edin</FormHelperText> */}
-        <FormHelperText error>{credentialsError.passwordRegister && "Sifre qeyd edin"}</FormHelperText>
+        <FormHelperText error>{credentialsError.passwordRegister && dictionary["Type password"][language.language]}</FormHelperText>
 
       </FormControl>
       <FormControl fullWidth>
-        <TextField type="password" error={credentialsError.confirmPassword} required size="small" label="Təkrar şifrə" onChange={(e:any)=>fillForm(e)} id="confirmPassword"></TextField>
+        <TextField type="password" error={credentialsError.confirmPassword} required size="small" label={dictionary["Confirm password"][language.language]} onChange={(e:any)=>fillForm(e)} id="confirmPassword"></TextField>
         {/* <FormHelperText error>Ad qeyd edin</FormHelperText> */}
-        <FormHelperText error>{credentialsError.confirmPassword && "Tekrar sifre qeyd edin"}</FormHelperText>
+        <FormHelperText error>{credentialsError.confirmPassword && dictionary["Type confirm password"][language.language]}</FormHelperText>
 
       </FormControl>
 
@@ -140,15 +144,19 @@ export default function RegisterComponent() {
           <FormControlLabel  label="test" control={<Checkbox required size="small"></Checkbox>}></FormControlLabel>
       </FormControl> */}
 
-      <Button onClick={(e:any)=>submit(e)} size="large" variant="contained" color="secondary" fullWidth type="submit">Register</Button>
-    
+      <Button onClick={(e:any)=>submit(e)} size="large" variant="contained" color="secondary" fullWidth type="submit">{dictionary["Register"][language.language]}</Button>
+
+      <hr/>
+
+      {/*<Button onClick={()=>navigate("/login")}>Hesabınız var? Daxil olun</Button>*/}
+      <Link to={"/login"}>{dictionary["Have an account"][language.language]}</Link>
 
     <Snackbar 
         anchorOrigin={{vertical,horizontal}}
         autoHideDuration={3000}
         onClose={()=>handleClose(false)}
         open={open}>
-            <Alert severity="success">Register succesfully</Alert>
+            <Alert severity="success">{dictionary["Register succesfully"][language.language]}</Alert>
 
 
     </Snackbar>

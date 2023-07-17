@@ -1,22 +1,33 @@
-import { Grid, Button, FormControl, TextField, Avatar } from "@mui/material"
+import {Grid, Button, FormControl, TextField, Avatar, NativeSelect, Typography,} from "@mui/material"
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import {
   useChangeUserDetailsMutation,
   useGetUserDetailsQuery,
 } from "../../features/userDetails"
-import { useState } from "react"
+import React, {useContext, useState} from "react"
 import { IUserDetails } from "../../Models/UserDetails"
 import dayjs from "dayjs"
 import axios from "axios"
 import { server, serverPort } from "../../services/config"
-
+import {dictionary} from "../../Language/lang";
 import Skeleton from '@mui/material/Skeleton';
+import {LanguageApi} from "../../contextApi/LanguageContext";
 
 export default function EditProfile() {
 
   const { data, isLoading, refetch } = useGetUserDetailsQuery("")
+  
+const language = useContext(LanguageApi)
 
+
+
+    function onChangeLanguage(e:any){
+        language.change(e.target.value)
+        localStorage.setItem("Lang",e.target.value)
+
+
+    }
 
   const [userCredentials, setUserCredentials] = useState<IUserDetails>({})
 
@@ -52,7 +63,7 @@ export default function EditProfile() {
       formData.append("file", userCredentials.profilePicture)
       formData.append("fileName", "ProfPic")
       try {
-        const res = await axios.post(`${server + serverPort}/profPic`, formData,{
+        const res = await axios.post(`${server }/profPic`, formData,{
           headers:{
             Authorization:document.cookie.split("=")[1]
           }
@@ -72,11 +83,12 @@ export default function EditProfile() {
     setUserCredentials((detail) => ({ ...detail, [key]: value }))
   }
 
-  // if (isLoading) {
-  //   return <Skeleton variant="circular"/>
-  // }
+  if (isLoading) {
+    return <Skeleton variant="circular"/>
+  }
 
 
+  
   return (
     <Grid
       component="form"
@@ -86,11 +98,11 @@ export default function EditProfile() {
     >
       <Grid item xs={12} md={2} sx={{display:"flex",flexDirection:"column",alignItems:"center"}}>
             <Avatar
-              src={profPic ? profPic : `${server+serverPort}/api/images/${data?.profilePicture}`}
+              src={profPic ? profPic : `${server}/api/images/${data?.profilePicture}`}
               sx={{ width: 124, height: 124 }}
             ></Avatar>
             <Button component="label" htmlFor="file">
-              Change profile
+              {dictionary["Change profile"][language.language]}
             </Button>
             <input
               onChange={handleProfPic}
@@ -113,7 +125,7 @@ export default function EditProfile() {
               sx={{ borderRadius: "20px" }}
               fullWidth
               size="small"
-              label="Name"
+              label={dictionary["Name"][language.language]}
               disabled
             ></TextField>
           </FormControl>
@@ -127,7 +139,7 @@ export default function EditProfile() {
             fullWidth
             size="small"
             value={data?.surname}
-            label="Surname"
+            label={dictionary["Surname"][language.language]}
             disabled
           ></TextField>
         </FormControl>
@@ -157,7 +169,7 @@ export default function EditProfile() {
             fullWidth
             size="small"
             value="**********"
-            label="Password"
+            label={dictionary["Password"][language.language]}
             disabled
           ></TextField>
         </FormControl>
@@ -175,7 +187,7 @@ export default function EditProfile() {
                   : userCredentials.birth
               }
               size="small"
-              label="Date of Birth"
+              label={dictionary["Date of Birth"][language.language]}
               format="DD-MM-YYYY"
             />
           </LocalizationProvider>
@@ -198,7 +210,7 @@ export default function EditProfile() {
             }
             fullWidth
             size="small"
-            label="Permanent Address"
+            label={dictionary["Permanent Address"][language.language]}
           ></TextField>
         </FormControl>
 
@@ -218,7 +230,7 @@ export default function EditProfile() {
             }
             fullWidth
             size="small"
-            label="Postal Code"
+            label={dictionary["Postal Code"][language.language]}
           ></TextField>
         </FormControl>
 
@@ -239,7 +251,7 @@ export default function EditProfile() {
                 ? data?.presentAdress
                 : userCredentials.presentAdress
             }
-            label="Pressent Address"
+            label={dictionary["Permanent Address"][language.language]}
           ></TextField>
         </FormControl>
 
@@ -260,7 +272,7 @@ export default function EditProfile() {
                 ? data?.city
                 : userCredentials.city
             }
-            label="City"
+            label={dictionary["City"][language.language]}
           ></TextField>
         </FormControl>
 
@@ -279,7 +291,7 @@ export default function EditProfile() {
                 ? data?.country
                 : userCredentials.country
             }
-            label="Country"
+            label={dictionary["Country"][language.language]}
           ></TextField>
         </FormControl>
 
@@ -301,9 +313,21 @@ export default function EditProfile() {
           variant="contained"
           disabled={Object.keys(userCredentials).length === 0}
         >
-          Save
+            {dictionary["Save"][language.language]}
         </Button>
       </Grid>
+
+        <Grid item xs={12} sx={{textAlign:"end",display:"flex",justifyContent:"end",alignItems:"center"}}>
+            {/*<Typography variant="subtitle2">Interfeys dili</Typography>*/}
+            <NativeSelect
+                onChange={onChangeLanguage}
+                value={language.language}
+            >
+                <option value="AZE">AZE</option>
+                <option value="EN">EN</option>
+
+            </NativeSelect>
+        </Grid>
     </Grid>
   )
 }

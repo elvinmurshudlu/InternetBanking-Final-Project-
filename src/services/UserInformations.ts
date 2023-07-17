@@ -5,7 +5,7 @@ import { ICardDetail } from "../Models/Card"
 export class FetchData {
   static async getCards() {
     const cookie = document.cookie.split("=")[1]
-    return await axios.get(`${server + serverPort + serverUrls.getCards}`, {
+    return await axios.get(`${server + serverUrls.getCards}`, {
       headers: {
         Authorization: cookie,
       },
@@ -25,7 +25,7 @@ export class FetchData {
     toCardNumber = toCardNumber.split(" ").join("")
 
     return await axios.post(
-      `${server + serverPort + serverUrls.quickTransfer}`,
+      `${server +  serverUrls.quickTransfer}`,
       { fromCardNumber, toCardNumber, amount,cardHolder },
       {
         headers: {
@@ -40,7 +40,7 @@ export class FetchData {
 
     const cookie = document.cookie.split("=")[1]
 
-    return await axios.post(`${server + serverPort + serverUrls.addCard}`,{"cardHolder":cardDetails.cardHolder,"cardNumber":cardDetails.cardNumber.split(" ").join(""),
+    return await axios.post(`${server  + serverUrls.addCard}`,{"cardHolder":cardDetails.cardHolder,"cardNumber":cardDetails.cardNumber.split(" ").join(""),
     "cvv":cardDetails.cvv,"date":cardDetails.date["$D"]+"/"+cardDetails.date["$y"]},{
       headers: {
         Authorization: cookie,
@@ -51,7 +51,7 @@ export class FetchData {
   static async cardAvailability(cardNumber:string,value:boolean,password:string){
     const cookie = document.cookie.split("=")[1]
 
-    return await axios.post(`${server + serverPort + serverUrls.cardAvailability}`,{cardNumber,value,password},
+    return await axios.post(`${server + serverUrls.cardAvailability}`,{cardNumber,value,password},
     {
       headers: {
         Authorization: cookie,

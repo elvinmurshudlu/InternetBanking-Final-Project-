@@ -1,8 +1,5 @@
-import { Box, IconButton ,Typography} from '@mui/material'
-import  { useState } from 'react'
+import { Box, IconButton ,Typography,Skeleton} from '@mui/material'
 import Card from '../../components/Card/Card'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store/store'
 import { ICard } from '../../Models/Card'
 
 import CircleIcon from '@mui/icons-material/Circle';
@@ -12,29 +9,42 @@ import { deepPurple } from '@mui/material/colors'
 import { Button } from '@mui/material'
 import {Link} from "react-router-dom"
 import { ROUTES } from '../../constants/routePath'
+import { useGetUserCardsQuery } from '../../features/cardDetails';
+import {dictionary} from "../../Language/lang";
+import {useContext} from "react";
+import {LanguageApi} from "../../contextApi/LanguageContext";
 
 
+export default function CardsContainer({arrowControl=true,currentSlider,setCurrentSlider,router=false,isLoading,cards}:{arrowControl?:boolean,currentSlider:number,setCurrentSlider:any,router?:boolean,isLoading?:boolean,cards:ICard[]}) {
 
+    const lang = useContext(LanguageApi)
 
-export default function CardsContainer({arrowControl=true,currentSlider,setCurrentSlider,router=false}:{arrowControl?:boolean,currentSlider:number,setCurrentSlider:any,router?:boolean}) {
-  // const [ currentSlider , setCurrentSlider ] = useState(0)
-
-  const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
-
+    const {isFetching} = useGetUserCardsQuery("")
+  
 
   function changeCard(val:number){
-    let newVal = currentSlider + val
-    if(newVal>=cards.length) newVal = 0
-    if(newVal<0) newVal = cards.length-1
+      let newVal = currentSlider + val
+      if(newVal>=cards.length) newVal = 0
+      if(newVal<0) newVal = cards.length-1
 
-    setCurrentSlider(newVal)
+      setCurrentSlider(newVal)
+  }
+
+
+  if(isLoading ){
+    return (
+      <>
+      <Skeleton variant="text" height={30}></Skeleton>
+      <Skeleton variant='rectangular' height={250}></Skeleton>
+      </>
+    )
   }
 
 
   return (
 
     <Box sx={{width:"100%"}}>
-      <Typography variant="h6" sx={{display:"flex",justifyContent:"space-between"}}>My Cards {router && <Button component={Link} to={ROUTES.ACCOUNT} >See details</Button>} </Typography>
+      <Typography variant="h6" sx={{display:"flex",justifyContent:"space-between"}}>{dictionary["My Cards"][lang.language]} {router && <Button component={Link} to={ROUTES.ACCOUNT} >{dictionary["See details"][lang.language]}</Button>} </Typography>
         <Box sx={{width:"100%",height:"200px",position:"relative",overflow:"hidden"}}>
           {
             cards  && cards.map((card:ICard,index:number)=>(

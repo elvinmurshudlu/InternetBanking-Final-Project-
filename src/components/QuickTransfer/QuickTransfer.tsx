@@ -7,28 +7,24 @@ import {
   Select,
   TextField,
   Typography,
+  Skeleton,
 } from "@mui/material"
-import { useState } from "react"
-import { useSelector } from "react-redux"
-import Card from "../Card/Card"
-import { RootState } from "../../store/store"
+import {useContext, useState} from "react"
 import { FetchData } from "../../services/UserInformations"
 import { State } from "../../Models/LoginRegister"
 import { Alert, Snackbar } from "@mui/material"
-import { blue, deepPurple } from "@mui/material/colors"
-import { ICard } from "../../Models/Card"
+import { deepPurple } from "@mui/material/colors"
+import { useGetUserCardsQuery } from "../../features/cardDetails"
+import {dictionary} from "../../Language/lang";
+import {LanguageApi} from "../../contextApi/LanguageContext";
 
 export default function QuickTransfer() {
-  const cards = useSelector((state: RootState) => state.userCards.cards)
-  
+  const { data: cards = [], isLoading } = useGetUserCardsQuery("")
   const [currentCard, setCurrentCard] = useState(0)
-
   const [amount, setAmount] = useState<string>("")
-
   const [targeCard, setTargetCard] = useState<string>("")
-
-  const [cardHolder,setCardHolder] = useState("")
-
+  const [cardHolder, setCardHolder] = useState("")
+  const language = useContext(LanguageApi)
   function handleChange(e: any) {
     setCurrentCard(e.target.value)
   }
@@ -80,11 +76,16 @@ export default function QuickTransfer() {
     selected: false,
     target: false,
     amount: false,
-    cardHolder:false
+    cardHolder: false,
   })
 
   function validation() {
-    const result = { selected: false, target: false, amount: false ,cardHolder:false}
+    const result = {
+      selected: false,
+      target: false,
+      amount: false,
+      cardHolder: false,
+    }
 
     let acc = true
 
@@ -102,13 +103,11 @@ export default function QuickTransfer() {
       result.amount = false
     }
 
-    if(cardHolder.trim()===""){
+    if (cardHolder.trim() === "") {
       result.cardHolder = true
       acc = false
-
-    }else{
+    } else {
       result.cardHolder = false
-
     }
 
     setErrors(result)
@@ -119,7 +118,7 @@ export default function QuickTransfer() {
   function amountFilter(value: string) {
     const regex = /^\d+$/
 
-    console.log(regex.test(value), value)
+    // console.log(regex.test(value), value)
 
     if ((regex.test(value) || value.trim() === "") && +value.trim() < 999999999)
       setAmount(value.trim())
@@ -137,6 +136,18 @@ export default function QuickTransfer() {
       ...prevVal,
       ["open"]: isOpen,
     }))
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <Skeleton variant="text" height={40}></Skeleton>
+        <Skeleton variant="text" height={90}></Skeleton>
+        <Skeleton variant="text" height={90}></Skeleton>
+        <Skeleton variant="text" height={90}></Skeleton>
+        <Skeleton variant="text" height={90}></Skeleton>
+      </>
+    )
   }
 
   return (
@@ -170,9 +181,7 @@ export default function QuickTransfer() {
           ></Card>
         )}
       </Box> */}
-      <Typography variant="h6" >
-        Quick Transfer
-      </Typography>
+      <Typography variant="h6">{dictionary["Transfer money"][language.language]}</Typography>
 
       <Box component="form">
         <FormControl
@@ -181,21 +190,25 @@ export default function QuickTransfer() {
             marginBottom: "10px",
           }}
         >
-          <InputLabel size="small" id="cards-title">Select your card</InputLabel>
+          <InputLabel size="small" id="cards-title">
+            {dictionary["Select your card"][language.language]}
+          </InputLabel>
           <Select
             labelId="cards-title"
-            label="Select your card"
+            label={dictionary["Select your card"][language.language]}
             onChange={(e) => handleChange(e)}
             error={errors.selected}
             size="small"
-
           >
             {cards.length > 0 &&
-              cards.map((card, index) => (
-                card.isAvailable && <MenuItem value={index}>
-                {cardNumberUI(card.cardNumber)}
-              </MenuItem>
-              ))}
+              cards.map(
+                (card, index) =>
+                  card.isAvailable && (
+                    <MenuItem value={index}>
+                      {cardNumberUI(card.cardNumber)}
+                    </MenuItem>
+                  )
+              )}
           </Select>
         </FormControl>
         <FormControl
@@ -207,10 +220,9 @@ export default function QuickTransfer() {
           <TextField
             value={targeCard}
             onChange={(e) => filterTargetCard(e.target.value)}
-            label="Card Number"
+            label={dictionary["Card number"][language.language]}
             error={errors.target}
             size="small"
-
           ></TextField>
         </FormControl>
 
@@ -223,10 +235,9 @@ export default function QuickTransfer() {
           <TextField
             value={cardHolder}
             onChange={(e) => setCardHolder(e.target.value)}
-            label="Card Holder"
+            label={dictionary["Card holder"][language.language]}
             error={errors.target}
             size="small"
-
           ></TextField>
         </FormControl>
 
@@ -239,7 +250,7 @@ export default function QuickTransfer() {
           <TextField
             value={+amount.toLocaleString()}
             onChange={(e) => amountFilter(e.target.value)}
-            label="Amount"
+            label={dictionary["Amount"][language.language]}
             error={errors.amount}
             size="small"
           ></TextField>
@@ -251,7 +262,7 @@ export default function QuickTransfer() {
           variant="contained"
           type="submit"
         >
-          Send
+          {dictionary["Send"][language.language]}
         </Button>
       </Box>
 
@@ -271,7 +282,7 @@ export default function QuickTransfer() {
           variant="filled"
           severity="success"
         >
-          Transfer succesfully
+          {dictionary["Transfer succesfully"][language.language]}
         </Alert>
       </Snackbar>
     </Box>

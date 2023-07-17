@@ -1,5 +1,7 @@
-import React from 'react'
 import Section from '../../container/Section/Section'
+import {dictionary} from "../../Language/lang";
+import {useContext} from "react";
+import {LanguageApi} from "../../contextApi/LanguageContext";
 import { Bar } from 'react-chartjs-2'
 import {
     Chart as ChartJS,
@@ -10,6 +12,10 @@ import {
     Tooltip,
     Legend,
   } from 'chart.js';
+
+
+  import {Skeleton} from "@mui/material"
+
 import { ITransactions } from '../../Models/Transactions';
   
   ChartJS.register(
@@ -20,12 +26,9 @@ import { ITransactions } from '../../Models/Transactions';
     Tooltip,
     Legend
   );
-  
-  
-  
-  
-  
-  export const options = {
+
+
+export const options = {
     responsive: true,
     plugins: {
       legend: {
@@ -34,13 +37,17 @@ import { ITransactions } from '../../Models/Transactions';
       
     },
   };
-  
-const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  
- 
-  
 
-export default function AccountsChart({transactions,header}:{transactions:ITransactions[],header:string}) {
+// const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+// const labels = ['Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə', 'Bazar'];
+
+const labels = {
+    "AZE":['Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə', 'Bazar'],
+    "EN":['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+} as {[key:string]:string[]}
+
+export default function AccountsChart({transactions,header,isLoading}:{transactions:ITransactions[],header:string,isLoading?:boolean}) {
+    const language = useContext(LanguageApi)
 
     let expense = [] as number[]
     let income = [] as number[]
@@ -68,24 +75,34 @@ export default function AccountsChart({transactions,header}:{transactions:ITrans
             }
   
           }
-          console.log(expense,income);
     }
 
     const data = {
-        labels,
+        labels:labels[language.language],
         datasets: [
           {
-            label: 'Income',
+            label: dictionary["Income"][language.language],
             data:income ,
             backgroundColor: 'rgba(53, 162, 235, 0.5)',
           },
           {
-            label: 'Expense',
+            label: dictionary["Expense"][language.language],
             data:expense ,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
           },
         ],
       };
+
+      if(isLoading){
+        return(
+          <>
+          <Skeleton variant='text' animation="wave" height={25}></Skeleton>
+          <Skeleton variant='rectangular' animation="wave" height={250}></Skeleton>
+          </>
+        )
+      }
+
+
   return (
     <Section header={header} height='360px' >
             <Bar  options={options} data={data} />
