@@ -11,6 +11,8 @@ import TransactionAccount from '../../components/Transactions/TransactionAccount
 import Section from '../../container/Section/Section'
 import AccountsChart from '../../components/AccountsChart/AccountsChart'
 import { useGetUserCardsQuery } from '../../features/cardDetails'
+import {palette,ThemeApi} from "../../contextApi/ThemeContext"
+
 
 import {dictionary} from "../../Language/lang";
 import {LanguageApi} from "../../contextApi/LanguageContext";
@@ -21,12 +23,12 @@ export default function Accounts() {
   const language = useContext(LanguageApi)
   const [currentSlider , setCurrentSlider] = useState(0)
 
+  const mode = useContext(ThemeApi)
   // const cards = useSelector((state:RootState)=>state.userCards.cards as ICard[])
 
   const {data:cards=[],isLoading} = useGetUserCardsQuery("")
 
   const transactions = useSelector((state:RootState)=>state.userTransactions.transactions)
-
 
   const [chip,setChip] = useState<IChip[]|null>(null)
 
@@ -114,7 +116,7 @@ export default function Accounts() {
         <Grid item xs={12} sx={{display:"flex"}}>
              <Grid container spacing={2}>
                 {chip && chip.map((ch)=>(
-                  <Grid item xs={12} md={6} lg={2.5}>
+                  <Grid  item xs={12} md={6} lg={2.5}>
 
                     <Chip image={ch.image} header={ch.header} title={ch.title} currency={ch.currency}></Chip>
 
@@ -132,10 +134,15 @@ export default function Accounts() {
         <Grid item xs={12} md={7.5} lg={9} sx={{padding:"0 0 0 20px"}}>
           
           <Section header='Last Transaction'>
-              <Box sx={{width:"100%",height:"300px",backgroundColor:"#FFF",borderRadius:"20px",overflow:"scroll",padding:"20px 0"}}> 
-                      {filterTransactions(transactions).map((transaction)=>(
-                        <TransactionAccount transaction={transaction}></TransactionAccount>
-                      ))}
+              <Box sx={{width:"100%",height:"300px",backgroundColor:palette.componentsBackground[mode.mode],borderRadius:"20px",overflow:"scroll",padding:"20px 0"}}>
+                {filterTransactions(transactions).length !=0 ?
+                <>
+                  {filterTransactions(transactions).map((transaction)=>(
+                      <TransactionAccount transaction={transaction}></TransactionAccount>
+                  ))}
+                </>:
+                    <Box sx={{width:"100%",height:"100%"}}>Transaksiyalar yoxdur :  Dizayn et</Box>
+                }
               </Box>
           </Section>
 
@@ -143,7 +150,7 @@ export default function Accounts() {
 
         
 
-        <Grid item xs={12} md={6} sx={{height:"380px"}}>
+        <Grid item xs={12} md={6} sx={{padding:'10px',height:"380px",backgroundColor:palette.componentsBackground[mode.mode],borderRadius:'20px',marginTop:'10px'}}>
           
           <AccountsChart  header='Debit & Credit Overview' transactions={filterTransactions(transactions)}></AccountsChart>
 

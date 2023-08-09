@@ -10,6 +10,8 @@ import QrScanner from "../../components/TabPanels/QrScanner"
 import {dictionary} from "../../Language/lang";
 import {LanguageApi} from "../../contextApi/LanguageContext";
 
+import {palette,ThemeApi} from "../../contextApi/ThemeContext"
+
 interface TabPanelProps {
   children?: any
   index: number
@@ -20,7 +22,7 @@ function TabPanel(props: TabPanelProps) {
 
   const { children, value, index, ...other } = props
 
-
+  
 
 
   return (
@@ -43,6 +45,7 @@ function TabPanel(props: TabPanelProps) {
 export default function SettingsPage() {
     const language = useContext(LanguageApi)
   const [value, setValue] = useState(0)
+  const mode = useContext(ThemeApi)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
@@ -56,9 +59,9 @@ export default function SettingsPage() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label={dictionary["Edit Profile"][language.language]} />
-          <Tab label={dictionary["Security"][language.language]} />
-          <Tab label="QR-Code" />
+          <Tab sx={{color:palette.textColor[mode.mode]}} label={dictionary["Edit Profile"][language.language]} />
+          <Tab sx={{color:palette.textColor[mode.mode]}} label={dictionary["Security"][language.language]} />
+          {/* <Tab label="QR-Code" /> */}
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -67,10 +70,9 @@ export default function SettingsPage() {
       <TabPanel value={value} index={1}>
         <ChangePassword></ChangePassword>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      {/* <TabPanel value={value} index={2}>
          <QrScanner></QrScanner>
-        {/*<p>NgRok configuration needed</p>*/}
-      </TabPanel>
+      </TabPanel> */}
     </Box>
   )
 }

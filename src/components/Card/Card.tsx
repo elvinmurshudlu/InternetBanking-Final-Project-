@@ -6,9 +6,11 @@ import {LanguageApi} from "../../contextApi/LanguageContext";
 import {useContext} from "react";
 
 import {dictionary} from "../../Language/lang";
+import {palette,ThemeApi} from "../../contextApi/ThemeContext"
 
 
 export default function Card({ cardInformation, selected, color }: ICardProps) {
+  const mode = useContext(ThemeApi)
 
     const lang = useContext(LanguageApi)
 
@@ -23,7 +25,7 @@ export default function Card({ cardInformation, selected, color }: ICardProps) {
           maxWidth:"360px",
           transition:"0.1s",
           height: "100%",
-          background: !cardInformation.isAvailable ? "grey" :  selected ? "linear-gradient(#FFAA07,#D99D2A)" : `#FFF`,
+          background: !cardInformation.isAvailable ? palette.blockedCard[mode.mode] :  selected ? palette.selectedCard[mode.mode] : palette.default[mode.mode],
           borderRadius: "15px",
           padding: "10px 20px",
           display: "flex",

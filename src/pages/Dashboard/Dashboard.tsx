@@ -1,5 +1,5 @@
 import {  Grid,  } from "@mui/material"
-import  { useState } from "react"
+import  { useState ,useContext} from "react"
 import CardsContainer from "../../container/CardsContainer/CardsContainer"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
@@ -7,9 +7,12 @@ import AccountsChart from "../../components/AccountsChart/AccountsChart"
 import QuickTransfer from "../../components/QuickTransfer/QuickTransfer"
 import CreditChart from "../../components/CreditCardChart/CreditChart"
 import { useGetUserCardsQuery } from "../../features/cardDetails"
+import {palette,ThemeApi} from "../../contextApi/ThemeContext"
 
 export default function Dashboard() {
   const [current, setCurrent] = useState(0)
+
+const mode = useContext(ThemeApi)
 
   const transactions = useSelector(
     (state: RootState) => state.userTransactions.transactions
@@ -30,7 +33,7 @@ export default function Dashboard() {
       </Grid>
 
 
-      <Grid item xs={12} md={3}>
+      <Grid item xs={12} md={3} sx={{backgroundColor:palette.componentsBackground[mode.mode],borderRadius:'10px',padding:'10px',marginTop:'10px',display:'flex',justifyContent:'center'}}>
         <CreditChart
           isLoading={isLoading}
           cards={cards}
@@ -38,7 +41,7 @@ export default function Dashboard() {
         ></CreditChart>
       </Grid>
 
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={6} sx={{backgroundColor:palette.componentsBackground[mode.mode],color:palette.textColor[mode.mode],borderRadius:'10px',padding:'10px'}}>
         <AccountsChart
           isLoading={isLoading}
           header="Weekly activity"

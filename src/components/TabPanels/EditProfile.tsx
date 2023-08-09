@@ -13,8 +13,12 @@ import { server, serverPort } from "../../services/config"
 import {dictionary} from "../../Language/lang";
 import Skeleton from '@mui/material/Skeleton';
 import {LanguageApi} from "../../contextApi/LanguageContext";
+import {palette,ThemeApi} from "../../contextApi/ThemeContext"
+
 
 export default function EditProfile() {
+
+  const mode = useContext(ThemeApi)
 
   const { data, isLoading, refetch } = useGetUserDetailsQuery("")
   
@@ -121,8 +125,9 @@ const language = useContext(LanguageApi)
   <Grid item xs={12} md={6}>
     <FormControl fullWidth>
             <TextField
+            
               value={data?.name}
-              sx={{ borderRadius: "20px" }}
+              sx={{ backgroundColor:palette.inputFields[mode.mode]}}
               fullWidth
               size="small"
               label={dictionary["Name"][language.language]}
@@ -135,7 +140,7 @@ const language = useContext(LanguageApi)
   
   <FormControl fullWidth>
           <TextField
-            sx={{ borderRadius: "20px" }}
+            sx={{ backgroundColor:palette.inputFields[mode.mode] }}
             fullWidth
             size="small"
             value={data?.surname}
@@ -150,7 +155,7 @@ const language = useContext(LanguageApi)
   <FormControl fullWidth>
           <TextField
             value={data?.email}
-            sx={{ borderRadius: "20px" }}
+            sx={{ backgroundColor:palette.inputFields[mode.mode]}}
             fullWidth
             size="small"
             label="Email"
@@ -165,7 +170,7 @@ const language = useContext(LanguageApi)
   
   <FormControl fullWidth>
           <TextField
-            sx={{ borderRadius: "20px" }}
+            sx={{backgroundColor:palette.inputFields[mode.mode]}}
             fullWidth
             size="small"
             value="**********"
@@ -189,6 +194,7 @@ const language = useContext(LanguageApi)
               size="small"
               label={dictionary["Date of Birth"][language.language]}
               format="DD-MM-YYYY"
+              sx={{backgroundColor:palette.inputFields[mode.mode]}}
             />
           </LocalizationProvider>
         </FormControl>
@@ -199,7 +205,7 @@ const language = useContext(LanguageApi)
   
   <FormControl fullWidth>
           <TextField
-            sx={{ borderRadius: "20px" }}
+            sx={{ backgroundColor:palette.inputFields[mode.mode]}}
             onChange={(e: any) =>
               handleChange("permanentAdress", e.target.value)
             }
@@ -221,7 +227,7 @@ const language = useContext(LanguageApi)
   
   <FormControl fullWidth>
           <TextField
-            sx={{ borderRadius: "20px" }}
+            sx={{ backgroundColor:palette.inputFields[mode.mode]}}
             onChange={(e: any) => handleChange("postalCode", e.target.value)}
             value={
               userCredentials.postalCode == undefined
@@ -242,7 +248,9 @@ const language = useContext(LanguageApi)
   
   <FormControl fullWidth>
           <TextField
-            sx={{ borderRadius: "20px" }}
+            sx={{ backgroundColor:palette.inputFields[mode.mode]}}
+            className="textField"
+            inputProps={{color:'red'}}
             fullWidth
             size="small"
             onChange={(e: any) => handleChange("presentAdress", e.target.value)}
@@ -263,7 +271,7 @@ const language = useContext(LanguageApi)
   
   <FormControl fullWidth>
           <TextField
-            sx={{ borderRadius: "20px" }}
+            sx={{ backgroundColor:palette.inputFields[mode.mode]}}
             fullWidth
             size="small"
             onChange={(e: any) => handleChange("city", e.target.value)}
@@ -282,7 +290,7 @@ const language = useContext(LanguageApi)
   
   <FormControl fullWidth>
           <TextField
-            sx={{ borderRadius: "20px" }}
+            sx={{ backgroundColor:palette.inputFields[mode.mode] }}
             fullWidth
             size="small"
             onChange={(e: any) => handleChange("country", e.target.value)}
@@ -322,6 +330,7 @@ const language = useContext(LanguageApi)
             <NativeSelect
                 onChange={onChangeLanguage}
                 value={language.language}
+                sx={{backgroundColor:palette.inputFields[mode.mode]}}
             >
                 <option value="AZE">AZE</option>
                 <option value="EN">EN</option>
@@ -335,12 +344,3 @@ const language = useContext(LanguageApi)
 
 
 
-// const [img, setImg] = useState('');
-
-
-
-
-// const handleImageChange = (e) => {
-//   const file = e.target.files[0];
-//   
-//     };

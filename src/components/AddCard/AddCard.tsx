@@ -7,10 +7,14 @@ import { useAddUserCardsMutation, useGetUserCardsQuery } from "../../features/ca
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import {dictionary} from "../../Language/lang";
 import {LanguageApi} from "../../contextApi/LanguageContext";
+import {palette,ThemeApi} from '../../contextApi/ThemeContext'
+
 
 export default function AddCard() {
   const language = useContext(LanguageApi)
   const {data:cards=[],refetch,isLoading,isFetching} = useGetUserCardsQuery("")
+
+  const mode = useContext(ThemeApi)
 
   const [addUserCards] = useAddUserCardsMutation()
 
@@ -115,7 +119,7 @@ export default function AddCard() {
     <Box
       sx={{
         borderRadius: "20px",
-        backgroundColor: "#FFF",
+        backgroundColor: palette.componentsBackground[mode.mode],
         padding: "30px",
       }}
     >
@@ -138,6 +142,7 @@ export default function AddCard() {
         <Grid item xs={12} md={5.5}>
           <FormControl fullWidth>
             <TextField
+            sx={{backgroundColor:palette.inputFields[mode.mode]}}
               error={detailErrors.cardNumber}
               value={cardDetails.cardNumber}
               onChange={(e: any) => filterTargetCard(e.target.value)}
@@ -148,6 +153,7 @@ export default function AddCard() {
         <Grid item xs={12} md={5.5}>
           <FormControl fullWidth>
             <TextField
+            sx={{backgroundColor:palette.inputFields[mode.mode]}}
               error={detailErrors.cardHolder}
               value={cardDetails.cardHolder}
               onChange={(e: any) =>
@@ -160,9 +166,9 @@ export default function AddCard() {
 
         <Grid item xs={12} md={5.5}>
           <FormControl fullWidth>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider  dateAdapter={AdapterDayjs}>
               <DatePicker
-              sx={{padding:"0",height:"10px",fontSize:"10px"}}
+              sx={{padding:"0",fontSize:"10px",backgroundColor:palette.inputFields[mode.mode]}}
                 value={cardDetails.date}
                 onChange={(value: any) => fillData("date", value)}
               />
@@ -173,6 +179,7 @@ export default function AddCard() {
         <Grid item xs={12} md={5.5}>
           <FormControl fullWidth>
             <TextField
+            sx={{backgroundColor:palette.inputFields[mode.mode]}}
               error={detailErrors.cvv}
               value={cardDetails.cvv}
               onChange={(e: any) => fillData("cvv", e.target.value)}
@@ -187,7 +194,7 @@ export default function AddCard() {
             onClick={submit}
             type="submit"
             variant="contained"
-            sx={{ padding: "10px 30px" }}
+            sx={{ padding: "10px 30px",backgroundColor:palette.buttonBackground[mode.mode] }}
           >
             {dictionary["Add card"][language.language]}
           </Button>

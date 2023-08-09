@@ -17,6 +17,8 @@ import { deepPurple } from "@mui/material/colors"
 import { useGetUserCardsQuery } from "../../features/cardDetails"
 import {dictionary} from "../../Language/lang";
 import {LanguageApi} from "../../contextApi/LanguageContext";
+import {palette,ThemeApi} from "../../contextApi/ThemeContext"
+
 
 export default function QuickTransfer() {
   const { data: cards = [], isLoading } = useGetUserCardsQuery("")
@@ -25,6 +27,9 @@ export default function QuickTransfer() {
   const [targeCard, setTargetCard] = useState<string>("")
   const [cardHolder, setCardHolder] = useState("")
   const language = useContext(LanguageApi)
+  const mode = useContext(ThemeApi)
+
+
   function handleChange(e: any) {
     setCurrentCard(e.target.value)
   }
@@ -155,7 +160,7 @@ export default function QuickTransfer() {
       sx={{
         width: "100%",
         padding: "15px",
-        backgroundColor: `#FFF`,
+        backgroundColor: palette.componentsBackground[mode.mode],
         borderRadius: "15px",
         display: "flex",
         flexDirection: "column",
@@ -163,24 +168,7 @@ export default function QuickTransfer() {
         color: "black",
       }}
     >
-      {/* <Typography variant="h5" gutterBottom>
-        My Wallet
-      </Typography>
-      <Box
-        sx={{
-          width: "100%",
-          height: "190px",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        {cards.length > 0 && (
-          <Card
-            cardInformation={cards[currentCard]}
-            color={blue["A700"]}
-          ></Card>
-        )}
-      </Box> */}
+      
       <Typography variant="h6">{dictionary["Transfer money"][language.language]}</Typography>
 
       <Box component="form">
@@ -190,15 +178,17 @@ export default function QuickTransfer() {
             marginBottom: "10px",
           }}
         >
-          <InputLabel size="small" id="cards-title">
+          <InputLabel sx={{color:palette.textColor[mode.mode]}} size="small" id="cards-title">
             {dictionary["Select your card"][language.language]}
           </InputLabel>
           <Select
+             className={mode.mode ==='dark' ? 'placeholder' :''}
             labelId="cards-title"
             label={dictionary["Select your card"][language.language]}
             onChange={(e) => handleChange(e)}
             error={errors.selected}
             size="small"
+            sx={{backgroundColor:palette.inputFields[mode.mode]}}
           >
             {cards.length > 0 &&
               cards.map(
@@ -218,11 +208,14 @@ export default function QuickTransfer() {
           }}
         >
           <TextField
+            className={mode.mode ==='dark' ? 'placeholder' :''}
+            sx={{backgroundColor:palette.inputFields[mode.mode]}}
             value={targeCard}
             onChange={(e) => filterTargetCard(e.target.value)}
             label={dictionary["Card number"][language.language]}
             error={errors.target}
             size="small"
+            
           ></TextField>
         </FormControl>
 
@@ -233,6 +226,7 @@ export default function QuickTransfer() {
           }}
         >
           <TextField
+          sx={{backgroundColor:palette.inputFields[mode.mode]}}
             value={cardHolder}
             onChange={(e) => setCardHolder(e.target.value)}
             label={dictionary["Card holder"][language.language]}
@@ -248,6 +242,7 @@ export default function QuickTransfer() {
           }}
         >
           <TextField
+          sx={{backgroundColor:palette.inputFields[mode.mode]}}
             value={+amount.toLocaleString()}
             onChange={(e) => amountFilter(e.target.value)}
             label={dictionary["Amount"][language.language]}
@@ -261,6 +256,7 @@ export default function QuickTransfer() {
           size="large"
           variant="contained"
           type="submit"
+          sx={{backgroundColor:palette.buttonBackground[mode.mode]}}
         >
           {dictionary["Send"][language.language]}
         </Button>

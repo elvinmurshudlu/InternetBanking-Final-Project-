@@ -13,11 +13,13 @@ import { useGetUserCardsQuery } from '../../features/cardDetails';
 import {dictionary} from "../../Language/lang";
 import {useContext} from "react";
 import {LanguageApi} from "../../contextApi/LanguageContext";
+import {palette, ThemeApi} from "../../contextApi/ThemeContext";
 
 
 export default function CardsContainer({arrowControl=true,currentSlider,setCurrentSlider,router=false,isLoading,cards}:{arrowControl?:boolean,currentSlider:number,setCurrentSlider:any,router?:boolean,isLoading?:boolean,cards:ICard[]}) {
 
     const lang = useContext(LanguageApi)
+    const mode = useContext(ThemeApi)
 
     const {isFetching} = useGetUserCardsQuery("")
   
@@ -44,7 +46,8 @@ export default function CardsContainer({arrowControl=true,currentSlider,setCurre
   return (
 
     <Box sx={{width:"100%"}}>
-      <Typography variant="h6" sx={{display:"flex",justifyContent:"space-between"}}>{dictionary["My Cards"][lang.language]} {router && <Button component={Link} to={ROUTES.ACCOUNT} >{dictionary["See details"][lang.language]}</Button>} </Typography>
+      <Typography  variant="h6" sx={{display:"flex",justifyContent:"space-between",color:palette.textColor[mode.mode]}}>
+        {dictionary["My Cards"][lang.language]} {router && <Button  component={Link} key={'unique'} to={ROUTES.ACCOUNT} >{dictionary["See details"][lang.language]}</Button>} </Typography>
         <Box sx={{width:"100%",height:"200px",position:"relative",overflow:"hidden"}}>
           {
             cards  && cards.map((card:ICard,index:number)=>(
@@ -74,16 +77,16 @@ export default function CardsContainer({arrowControl=true,currentSlider,setCurre
         
         {
           arrowControl && <Box  sx={{width:"100%",height:"20px",padding:"0 20px",display:"flex",justifyContent:"space-between"}}>
-          <IconButton size='large' onClick={()=>changeCard(-1)}><ArrowBackIosNew fontSize='small'></ArrowBackIosNew></IconButton>
+          <IconButton size='large' onClick={()=>changeCard(-1)}><ArrowBackIosNew sx={{color:palette.textColor[mode.mode]}} fontSize='small'></ArrowBackIosNew></IconButton>
 
           <Box>{
             cards && cards.map((card:ICard,index:number)=>(
-              <IconButton size='small' sx={{fontSize:"10px"}}  onClick={()=>setCurrentSlider(index)}><CircleIcon fontSize='inherit' sx={{color:index === currentSlider ? deepPurple["300"]:deepPurple["900"]}}></CircleIcon></IconButton>
+              <IconButton size='small' sx={{fontSize:"10px"}}  onClick={()=>setCurrentSlider(index)}><CircleIcon fontSize='inherit' sx={{color:index === currentSlider ? palette.activeCardIndicator[mode.mode]:palette.nonActiveCardIndicator[mode.mode]}}></CircleIcon></IconButton>
             ))
             
             }</Box>
 
-          <IconButton onClick={()=>changeCard(1)} size='large'  ><ArrowForwardIos fontSize='small'></ArrowForwardIos></IconButton>
+          <IconButton onClick={()=>changeCard(1)} size='large'  ><ArrowForwardIos sx={{color:palette.textColor[mode.mode]}} fontSize='small'></ArrowForwardIos></IconButton>
         </Box>
         }
     </Box>

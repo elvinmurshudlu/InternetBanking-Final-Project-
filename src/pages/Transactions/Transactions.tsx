@@ -13,6 +13,8 @@ import QuickTransfer from "../../components/QuickTransfer/QuickTransfer";
 import { useGetUserCardsQuery } from "../../features/cardDetails";
 import {LanguageApi} from "../../contextApi/LanguageContext";
 
+import {palette,ThemeApi} from "../../contextApi/ThemeContext"
+
 export default function Transactions() {
     const language = useContext(LanguageApi);
 
@@ -23,6 +25,7 @@ export default function Transactions() {
       const {data:cards=[],isLoading} = useGetUserCardsQuery("")
 
 
+      const mode = useContext(ThemeApi)
       
 
 
@@ -105,8 +108,8 @@ export default function Transactions() {
           
             
            {
-            transactions &&  <Grid item xs={12} md={4} sx={{padding:"0",height:"260px"}}>
-            <Typography variant="h6">{dictionary["My Expense"][language.language]}</Typography>
+            transactions &&  <Grid item xs={12} md={4} sx={{padding:"10px",height:"260px",backgroundColor:palette.componentsBackground[mode.mode],borderRadius:'20px'}}>
+            <Typography sx={{color:palette.textColor[mode.mode]}} variant="h6">{dictionary["My Expense"][language.language]}</Typography>
           <ResponsiveBar data={dataFilter(transactions)} keys={["expense"]}
            indexBy="day" 
            margin={{ top: 30, right: 10, bottom: 55, left: 30 }}

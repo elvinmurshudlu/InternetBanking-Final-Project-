@@ -12,9 +12,14 @@ import AddCard from "../../components/AddCard/AddCard"
 import {dictionary} from "../../Language/lang";
 import {LanguageApi} from "../../contextApi/LanguageContext";
 
+import {palette,ThemeApi} from "../../contextApi/ThemeContext"
+
 export default function Cards() {
   const language = useContext(LanguageApi)
   const [currentCard, setCurrentCard] = useState(0)
+
+
+  const mode = useContext(ThemeApi)
 
   const {data:cards=[],isLoading} = useGetUserCardsQuery("")
 
@@ -45,7 +50,7 @@ export default function Cards() {
       <Grid item xs={12} md={4}>
         {cards.length && (
           <Section header="Card Settings">
-            <Box sx={{ backgroundColor: "#FFF", borderRadius: "20px" }}>
+            <Box sx={{ backgroundColor: palette.componentsBackground[mode.mode], borderRadius: "20px" }}>
               <Settings currentCard={cards[currentCard]}></Settings>
             </Box>
           </Section>

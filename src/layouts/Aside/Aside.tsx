@@ -8,8 +8,8 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import {palette, ThemeApi} from "../../contextApi/ThemeContext";
 
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import {dictionary} from "../../Language/lang";
 import { lists} from "../../constants/AsideLists"
 
@@ -20,38 +20,27 @@ import {useContext, useEffect} from "react";
 import  {LanguageApi} from "../../contextApi/LanguageContext";
 
 
-
-
 export default function Aside() {
+    const mode = useContext(ThemeApi)
+
   let location = useLocation();
 
   const lang = useContext(LanguageApi)
 
-    console.log(lang.language)
-
-
-
-
-
   return (
 
-
-  
  <Box
       sx={{
         width: "100%",
         display: "flex",
         alignItems: "center",
-        // background: `linear-gradient(#763ED0, #4A28B2)`,
-        backgroundColor: `#FFF`,
-        // borderTopRightRadius:"20px",
-        // borderBottomRightRadius:"20px",
-        borderRight:"2px solid #E6EFF5",
+          // backgroundColor: `#FFF`,
+           backgroundColor: palette.primary[mode.mode],
+        borderRight:`2px solid ${palette.border[mode.mode]}`,
         flexDirection:"column",
         padding:"35px 0px",
         rowGap:"20px"
       }}
-
     >
 
         <Typography sx={{display:"flex",alignItems:"center",fontSize:"30px",color:"#343C6A",columnGap:"20px"}}>

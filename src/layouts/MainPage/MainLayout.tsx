@@ -1,10 +1,10 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
-import {useEffect , useState} from "react"
+import {useContext, useEffect, useState} from "react"
 import { Authendication } from "../../services/Auth"
 import { Box, Grid } from "@mui/material"
 import Aside from "../Aside/Aside"
 import { deepPurple } from "@mui/material/colors"
-
+import {palette, ThemeApi} from "../../contextApi/ThemeContext";
 import animation from "../../assets/Animations/animation.module.css"
 import Header from "../../components/Header/Header"
 import { useDispatch, useSelector } from "react-redux"
@@ -17,7 +17,8 @@ import { Alert, Snackbar } from "@mui/material"
 import { useGetUserCardsQuery } from "../../features/cardDetails"
 
 
-export default function MainLayout() {  
+export default function MainLayout() {
+    const mode = useContext(ThemeApi)
 
   let [isLogged,setIsLogged] = useState(false)
 
@@ -140,12 +141,12 @@ export default function MainLayout() {
 
           <Box sx={{position:"absolute",zIndex:"1",width:"100%",height:"100%",padding:"0px 0px",overflow:"scroll",}}>
 
-                <Box sx={{width:"100%",height:90,padding:"0 15px",backgroundColor:"#FFF",display:"flex",alignItems:"center"}}>
+                <Box sx={{width:"100%",height:90,padding:"0 15px",backgroundColor:palette.primary[mode.mode],display:"flex",alignItems:"center"}}>
                     <Header ></Header>
                 </Box>
 
                                                      {/* ,overflow:"scroll" */}
-                <Box sx={{height:'calc(100vh - 90px)',padding:"15px 35px",backgroundColor:"#F5F7FA",overflow:"scroll"}}> 
+                <Box sx={{height:'calc(100vh - 90px)',padding:"15px 35px",backgroundColor:palette.secondary[mode.mode],overflow:"scroll"}}>
                     <Outlet ></Outlet>
                   </Box> 
            

@@ -66,7 +66,7 @@ export default function Header() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor:"#FFF"
+          // backgroundColor:"#FFF"
         }}
       >
         <Typography
@@ -88,18 +88,18 @@ export default function Header() {
             {/*{currentPage.title}*/}
         </Typography>
 
-        <TextField
-          sx={{ display: { xs: "none", sm: "flex" } }}
-          size="small"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: "white" }}></SearchIcon>
-              </InputAdornment>
-            ),
-          }}
-          placeholder="Search here ..."
-        ></TextField>
+        {/*<TextField*/}
+        {/*  sx={{ display: { xs: "none", sm: "flex" } }}*/}
+        {/*  size="small"*/}
+        {/*  InputProps={{*/}
+        {/*    endAdornment: (*/}
+        {/*      <InputAdornment position="start">*/}
+        {/*        <SearchIcon sx={{ color: "white" }}></SearchIcon>*/}
+        {/*      </InputAdornment>*/}
+        {/*    ),*/}
+        {/*  }}*/}
+        {/*  placeholder="Search here ..."*/}
+        {/*></TextField>*/}
 
         <List
           sx={{
@@ -108,7 +108,7 @@ export default function Header() {
             position: "relative",
           }}
         >
-          <ListItem>
+          {/* <ListItem>
             <IconButton onClick={(e: any) => setNotificationBox(!notificationBox)}>
               <Badge
                 badgeContent={notificationsFilter(transactions)}
@@ -117,29 +117,29 @@ export default function Header() {
               >
                 <Notifications
                   sx={{
-                    color: "white",
+                    color: "black",
                   }}
                   fontSize="medium"
                 ></Notifications>
               </Badge>
             </IconButton>
             <NotificationBox open={notificationBox}></NotificationBox>
-          </ListItem>
+          </ListItem> */}
 
-          <ListItem>
-            <IconButton>
-              <Badge badgeContent="20" color="secondary" max={10}>
-                <Message
-                  sx={{
-                    color: "white",
-                  }}
-                  fontSize="medium"
-                ></Message>
-              </Badge>
-            </IconButton>
-          </ListItem>
+          {/*<ListItem>*/}
+          {/*  <IconButton>*/}
+          {/*    <Badge badgeContent="20" color="secondary" max={10}>*/}
+          {/*      <Message*/}
+          {/*        sx={{*/}
+          {/*          color: "black",*/}
+          {/*        }}*/}
+          {/*        fontSize="medium"*/}
+          {/*      ></Message>*/}
+          {/*    </Badge>*/}
+          {/*  </IconButton>*/}
+          {/*</ListItem>*/}
 
-          <ListItem>
+          {/* <ListItem>
             <IconButton>
               <Badge color="secondary" max={10}>
                 <Person
@@ -150,7 +150,7 @@ export default function Header() {
                 ></Person>
               </Badge>
             </IconButton>
-          </ListItem>
+          </ListItem> */}
         </List>
       </Box>
     </ThemeProvider>

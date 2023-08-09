@@ -13,4 +13,12 @@ font-family: 'Roboto', sans-serif!important;
 }
 
 
+.placeholder  input::placeholder{
+    color:white
+}
+
+
+.textField{
+    color: re !important;
+}
 
