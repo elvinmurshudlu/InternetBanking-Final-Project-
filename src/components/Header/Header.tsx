@@ -24,8 +24,14 @@ import { ITransactions } from "../../Models/Transactions"
 import NotificationBox from "../NotificationBox/NotificationBox"
 import {LanguageApi} from "../../contextApi/LanguageContext";
 import {dictionary} from "../../Language/lang";
+import MobileNavbar from "../MobileNavbar/MobileNavbar"
+import { palette,ThemeApi } from "../../contextApi/ThemeContext"
+
+import { FiMenu } from 'react-icons/fi';
 
 export default function Header() {
+
+  const mode = useContext(ThemeApi)
 
     const lang = useContext(LanguageApi)
 
@@ -56,7 +62,13 @@ export default function Header() {
     })
   }, [location])
 
+  useEffect(()=>{
+    setMobileNavbar(false)
+  },[location.pathname])
+
   const [notificationBox, setNotificationBox] = useState<boolean>(false)
+
+  const [openMobileNavbar,setMobileNavbar] = useState(false)
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,7 +78,7 @@ export default function Header() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          // backgroundColor:"#FFF"
+          position:'relative'
         }}
       >
         <Typography
@@ -88,70 +100,18 @@ export default function Header() {
             {/*{currentPage.title}*/}
         </Typography>
 
-        {/*<TextField*/}
-        {/*  sx={{ display: { xs: "none", sm: "flex" } }}*/}
-        {/*  size="small"*/}
-        {/*  InputProps={{*/}
-        {/*    endAdornment: (*/}
-        {/*      <InputAdornment position="start">*/}
-        {/*        <SearchIcon sx={{ color: "white" }}></SearchIcon>*/}
-        {/*      </InputAdornment>*/}
-        {/*    ),*/}
-        {/*  }}*/}
-        {/*  placeholder="Search here ..."*/}
-        {/*></TextField>*/}
+        <Box  sx={{  position:'absolute',left:'0',top:'130%',zIndex:'4',width:'100%', height:openMobileNavbar ? 'max-content' : '0',overflow:'hidden',backgroundColor:palette.componentsBackground[mode.mode],padding:openMobileNavbar ? '20px 0 30px 0' :'0'}}>
+          <MobileNavbar></MobileNavbar>
+        </Box>
 
-        <List
-          sx={{
-            display: { xs: "none", md: "flex" },
-            fontSize: "30px",
-            position: "relative",
-          }}
-        >
-          {/* <ListItem>
-            <IconButton onClick={(e: any) => setNotificationBox(!notificationBox)}>
-              <Badge
-                badgeContent={notificationsFilter(transactions)}
-                color="secondary"
-                max={10}
-              >
-                <Notifications
-                  sx={{
-                    color: "black",
-                  }}
-                  fontSize="medium"
-                ></Notifications>
-              </Badge>
-            </IconButton>
-            <NotificationBox open={notificationBox}></NotificationBox>
-          </ListItem> */}
-
-          {/*<ListItem>*/}
-          {/*  <IconButton>*/}
-          {/*    <Badge badgeContent="20" color="secondary" max={10}>*/}
-          {/*      <Message*/}
-          {/*        sx={{*/}
-          {/*          color: "black",*/}
-          {/*        }}*/}
-          {/*        fontSize="medium"*/}
-          {/*      ></Message>*/}
-          {/*    </Badge>*/}
-          {/*  </IconButton>*/}
-          {/*</ListItem>*/}
-
-          {/* <ListItem>
-            <IconButton>
-              <Badge color="secondary" max={10}>
-                <Person
-                  sx={{
-                    color: "white",
-                  }}
-                  fontSize="medium"
-                ></Person>
-              </Badge>
-            </IconButton>
-          </ListItem> */}
-        </List>
+        <Box onClick={()=>setMobileNavbar(!openMobileNavbar)} sx={{display:{xs:'block',md:'none'}}}>
+        <Avatar
+            variant="square"
+            sx={{ borderRadius: "10px", bgcolor: "#FFF" }}
+          >
+            <IconButton><FiMenu></FiMenu></IconButton>
+          </Avatar>
+        </Box>
       </Box>
     </ThemeProvider>
   )
