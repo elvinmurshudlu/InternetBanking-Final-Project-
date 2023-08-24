@@ -1,4 +1,4 @@
-import {Grid, Button, FormControl, TextField, Avatar, NativeSelect, Typography,} from "@mui/material"
+import {Grid, Button, FormControl, TextField, Avatar, NativeSelect, Typography,Box} from "@mui/material"
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import {
@@ -14,6 +14,7 @@ import {dictionary} from "../../Language/lang";
 import Skeleton from '@mui/material/Skeleton';
 import {LanguageApi} from "../../contextApi/LanguageContext";
 import {palette,ThemeApi} from "../../contextApi/ThemeContext"
+import {useNavigate} from "react-router-dom";
 
 
 export default function EditProfile() {
@@ -32,6 +33,24 @@ const language = useContext(LanguageApi)
 
 
     }
+
+    const navigate = useNavigate()
+
+
+    function onChangeTheme(e:any){
+        mode.changeTheme(e.target.value)
+        localStorage.setItem("theme",e.target.value)
+
+
+    }
+
+    function logOut(){
+        document.cookie = `TOKEN=`;
+
+        navigate('/login')
+
+    }
+
 
   const [userCredentials, setUserCredentials] = useState<IUserDetails>({})
 
@@ -100,7 +119,7 @@ const language = useContext(LanguageApi)
       rowSpacing={5}
       sx={{ justifyContent: "space-between", padding: "0 35px 0 0" }}
     >
-      <Grid item xs={12} md={2} sx={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+      <Grid item  xs={12} md={2} sx={{display:"flex",flexDirection:"column",alignItems:"center"}}>
             <Avatar
               src={profPic ? profPic : `${server}/api/images/${data?.profilePicture}`}
               sx={{ width: 124, height: 124 }}
@@ -121,11 +140,11 @@ const language = useContext(LanguageApi)
         // sx={{ display: "flex", flexDirection: "column", rowGap: "30px" }}
 
 >
-  <Grid container spacing={3} sx={{display:'flex',justifyContent:"space-between"}}>
-  <Grid item xs={12} md={6}>
-    <FormControl fullWidth>
+  <Grid container className={mode.mode} spacing={3} sx={{display:'flex',justifyContent:"space-between"}}>
+  <Grid  item xs={12} md={6}>
+    <FormControl fullWidth >
             <TextField
-            
+
               value={data?.name}
               sx={{ backgroundColor:palette.inputFields[mode.mode]}}
               fullWidth
@@ -325,8 +344,22 @@ const language = useContext(LanguageApi)
         </Button>
       </Grid>
 
-        <Grid item xs={12} sx={{textAlign:"end",display:"flex",justifyContent:"end",alignItems:"center"}}>
+        <Grid item xs={12} sx={{textAlign:"end",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             {/*<Typography variant="subtitle2">Interfeys dili</Typography>*/}
+
+            <Box sx={{display:'flex',gap:'10px',alignItems:'center'}}>
+                <p style={{color:palette.textColor[mode.mode]}}>Theme: </p>
+                <NativeSelect
+                    onChange={onChangeTheme}
+                    value={mode.mode}
+                    sx={{backgroundColor:palette.inputFields[mode.mode]}}
+                >
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+
+                </NativeSelect>
+            </Box>
+
             <NativeSelect
                 onChange={onChangeLanguage}
                 value={language.language}
@@ -336,6 +369,11 @@ const language = useContext(LanguageApi)
                 <option value="EN">EN</option>
 
             </NativeSelect>
+        </Grid>
+        <Grid item xs={12} sx={{display:"flex",justifyContent:"end"}}>
+            {/*<Typography variant="subtitle2">Interfeys dili</Typography>*/}
+
+            <Button onClick={logOut} variant={'contained'} color={'error'}>{dictionary['logout'][language.language]}</Button>
         </Grid>
     </Grid>
   )

@@ -334,6 +334,10 @@ export const dictionary = {
         "AZE":"Şifrəni dəyiş",
         "EN":"Change password"
     }
+    , "logout":{
+        "AZE":"Hesabdan çıx",
+        "EN":"Log out"
+    }
 
 
 

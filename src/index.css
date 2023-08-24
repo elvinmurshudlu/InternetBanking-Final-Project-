@@ -19,6 +19,9 @@ font-family: 'Roboto', sans-serif!important;
 
 
 .mobileNavbar{
-    transition: 1sn ease-in-out;
+    transition: 1s ease-in-out;
 }
 
+.dark .MuiInputLabel-animated{
+    color: rgba(255, 255, 255, 0.7) !important;
+}

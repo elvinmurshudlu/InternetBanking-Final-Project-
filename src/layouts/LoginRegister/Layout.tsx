@@ -86,7 +86,7 @@ export default function Layout(props:any) {
         <Grid item sm={0} md={9} sx={{width:"100%", maxHeight:"100%",display:{xs:"none" , md:"inline"}}}  >
 
           <Box component="div" sx={{width:"100%",maxHeight:"100%",overflow:"hidden"}}>
-            {/* <img style={{width:"100%",height:"100%",objectFit:"cover",transition:"2s"}} src={currentImage} alt="" /> */}
+             <img style={{width:"100%",height:"100%",objectFit:"cover",transition:"2s"}} src={currentImage} alt="" />
           </Box>
 
         </Grid>
@@ -95,7 +95,8 @@ export default function Layout(props:any) {
 
           <Grid item xs={12} sx={{display:"flex",justifyContent:"center"}}>
 
-            <h1 style={{width:"80%",padding:"10px"}}>Paysa</h1>
+            <h1 style={{width:"80%",padding:"10px",textAlign:'center',color:'red'
+            ,paddingTop:'40px',letterSpacing:"2px"}}>CoderBank</h1>
 
           </Grid>
 
@@ -108,7 +109,7 @@ export default function Layout(props:any) {
           <Grid item xs={12} sx={{display:"flex",justifyContent:"center"}}>
             <Box component="div" sx={{width:"65%"}}>
 
-            <Button onClick={handleOpen}><QrCode2Icon sx={{fontSize:"60px"}}></QrCode2Icon>Login WIth QR CODE</Button>
+            {/*<Button onClick={handleOpen}><QrCode2Icon sx={{fontSize:"60px"}}></QrCode2Icon>Login WIth QR CODE</Button>*/}
                 <Modal
                   
                   open={open}
