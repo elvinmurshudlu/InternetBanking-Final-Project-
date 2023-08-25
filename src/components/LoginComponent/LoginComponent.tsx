@@ -106,12 +106,14 @@ export default function LoginComponent() {
     <ThemeProvider theme={theme}>
       <Box
         component="form"
+        className={'form_login dark'}
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: "80%",
+          width: "90%",
           alignItems: "center",
           rowGap: "15px",
+
         }}
       >
         <FormControl fullWidth margin="normal">

@@ -102,10 +102,10 @@ export default function RegisterComponent() {
 
 
   return (
-    <Box component="form" sx={{
+    <Box className={'form_login dark'} component="form" sx={{
       display: "flex",
       flexDirection: "column",
-      width: "80%",
+      width: "90%",
       alignItems: "center",
       rowGap: "10px",
     }}>
@@ -144,12 +144,12 @@ export default function RegisterComponent() {
           <FormControlLabel  label="test" control={<Checkbox required size="small"></Checkbox>}></FormControlLabel>
       </FormControl> */}
 
-      <Button onClick={(e:any)=>submit(e)} size="large" variant="contained" color="secondary" fullWidth type="submit">{dictionary["Register"][language.language]}</Button>
+      <Button onClick={(e:any)=>submit(e)} size="large" variant="contained" color="error" fullWidth type="submit">{dictionary["Register"][language.language]}</Button>
 
       <hr/>
 
       {/*<Button onClick={()=>navigate("/login")}>Hesabınız var? Daxil olun</Button>*/}
-      <Link to={"/login"}>{dictionary["Have an account"][language.language]}</Link>
+      <Link to={"/login"} ><span style={{color:'white'}}>{dictionary["Have an account"][language.language]}</span></Link>
 
     <Snackbar 
         anchorOrigin={{vertical,horizontal}}

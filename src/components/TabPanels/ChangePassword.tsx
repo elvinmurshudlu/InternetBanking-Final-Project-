@@ -2,6 +2,7 @@ import { Grid,FormControl ,TextField, Button} from '@mui/material'
 import {useContext, useState} from 'react'
 import {dictionary} from "../../Language/lang";
 import {LanguageApi} from "../../contextApi/LanguageContext";
+import {ThemeApi} from "../../contextApi/ThemeContext";
 
 interface IChangePassword{
     password?:string
@@ -12,6 +13,7 @@ interface IChangePassword{
 }
 
 export default function ChangePassword() {
+    const mode = useContext(ThemeApi)
     const language = useContext(LanguageApi)
     const [credentials,setCredentials] = useState<IChangePassword>({})
 
@@ -22,8 +24,12 @@ export default function ChangePassword() {
 
     }
 
+    function changePassword(){
+
+    }
+
   return (
-        <Grid container spacing={2} >
+        <Grid container className={mode.mode} spacing={2} >
             <Grid item xs={12} >
                 <FormControl >
                     <TextField

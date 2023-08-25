@@ -38,3 +38,10 @@ font-family: 'Roboto', sans-serif!important;
 .login_layout{
     background: url(assets/pictures/slider/login4.jpg);
 }
+
+.form_login{
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    border-radius: 10px;
+}
