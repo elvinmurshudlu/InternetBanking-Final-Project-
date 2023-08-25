@@ -92,12 +92,11 @@ export default function Header() {
         >
           <Avatar
             variant="square"
-            sx={{ borderRadius: "10px", bgcolor: "#FFF" }}
+            sx={{ borderRadius: "10px", bgcolor: palette['componentsBackground'][mode.mode] ,paddingTop:'5px'}}
           >
             {currentPage.icon}
           </Avatar>
             {currentPage.title && dictionary[currentPage.title][lang.language]}
-            {/*{currentPage.title}*/}
         </Typography>
 
         <Box  sx={{  position:'absolute',left:'0',top:'130%',zIndex:'4',width:'100%', height:openMobileNavbar ? 'max-content' : '0',overflow:'hidden',backgroundColor:palette.componentsBackground[mode.mode],padding:openMobileNavbar ? '20px 0 30px 0' :'0'}}>

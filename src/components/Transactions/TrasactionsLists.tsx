@@ -6,6 +6,7 @@ import {useState} from "react"
 import {dictionary} from "../../Language/lang";
 import {LanguageApi} from "../../contextApi/LanguageContext";
 import {palette,ThemeApi} from "../../contextApi/ThemeContext"
+import NoTransaction from "../NoTransaction/NoTransaction";
 
 export default function Trasactions({transactions,isLoading}:{transactions:ITransactions[],isLoading?:boolean}) {
   const [filterTransaction,setFilter] = useState("All")
@@ -76,9 +77,16 @@ export default function Trasactions({transactions,isLoading}:{transactions:ITran
 
               <List sx={{width:"100%",height:"100%",overflow:"scroll",padding:"5px 0",marginTop:"15px",backgroundColor:palette.componentsBackground[mode.mode]}}>
 
-              {filter(transactions).map((transaction)=>(
+              {
+                transactions.length !==0 ?
+
+                filter(transactions).map((transaction)=>(
                   <TransactionListItem transaction={transaction}></TransactionListItem>
-              ))}
+              ))
+                    : <NoTransaction></NoTransaction>
+              }
+
+
               
               
 

@@ -10,12 +10,17 @@ import {
 import getSymbolFromCurrency from "currency-symbol-map"
 import { ITransactions } from "../../Models/Transactions"
 import {amount} from "../../utils/functions"
+import {palette, ThemeApi} from "../../contextApi/ThemeContext";
+import {useContext} from "react";
 
 export default function TransactionListItem({
   transaction,
 }: {
   transaction: ITransactions
 }) {
+
+  const mode = useContext(ThemeApi)
+
   function convertTime(time: string) {
     let date = new Date(time)
 
@@ -35,6 +40,7 @@ export default function TransactionListItem({
   function download(event:any){
     
     event.stopPropagation()
+    console.log(transaction)
 
 
 
@@ -48,7 +54,7 @@ export default function TransactionListItem({
         <Grid container>
           <Grid item xs={6} md={2}>
             <ListItemAvatar></ListItemAvatar>
-            <ListItemText>
+            <ListItemText >
               {transaction.connectedUser}
               <ListItemText sx={{display:{xs:"block",md:"none"}}} primaryTypographyProps={{ fontSize: "11px" }}>
               {convertTime(transaction.createdAt)}
@@ -97,7 +103,7 @@ export default function TransactionListItem({
            <Grid item xs={1.5} sx={{ textAlign: "center",display:{xs:"none",md:"block"} }}>
             <ListItemText>
               <ListItemIcon></ListItemIcon>
-              <Chip onClick={download} label="Download" ></Chip>
+              <Chip onClick={download} label="Download" className={'downloadChip'} sx={{backgroundColor:palette['downloadChip'][mode.mode] , }}></Chip>
             </ListItemText>
           </Grid>
 

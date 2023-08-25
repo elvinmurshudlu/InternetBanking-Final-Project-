@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import {palette, ThemeApi} from "../../contextApi/ThemeContext";
-
+import Logo from '../../assets/logo/logo-orange.png'
 import {dictionary} from "../../Language/lang";
 import { lists} from "../../constants/AsideLists"
 
@@ -44,11 +44,12 @@ export default function Aside() {
     >
 
         <Typography sx={{display:"flex",alignItems:"center",fontSize:"30px",color:"#343C6A",columnGap:"20px"}}>
-            <Avatar variant="square" sx={{borderRadius:"10px",backgroundColor:"#FFF"}}>
-              <img src="./icons/Logo.svg" alt="" />
-            </Avatar>
+            {/*<Avatar variant="square" sx={{borderRadius:"10px",backgroundColor:"#FFF"}}>*/}
+            {/*  <img src="./icons/Logo.svg" alt="" />*/}
+            {/*</Avatar>*/}
 
-            softbank
+            {/*softbank*/}
+            <img style={{width:'100%'}} src={Logo} alt=""/>
 
         </Typography>
 

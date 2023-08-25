@@ -16,6 +16,7 @@ import {palette,ThemeApi} from "../../contextApi/ThemeContext"
 
 import {dictionary} from "../../Language/lang";
 import {LanguageApi} from "../../contextApi/LanguageContext";
+import NoTransaction from "../../components/NoTransaction/NoTransaction";
 
 
 export default function Accounts() {
@@ -135,13 +136,13 @@ export default function Accounts() {
           
           <Section header='Last Transaction'>
               <Box sx={{width:"100%",height:"300px",backgroundColor:palette.componentsBackground[mode.mode],borderRadius:"20px",overflow:"scroll",padding:"20px 0"}}>
-                {filterTransactions(transactions).length !=0 ?
+                {filterTransactions(transactions).length !==0 ?
                 <>
                   {filterTransactions(transactions).map((transaction)=>(
                       <TransactionAccount transaction={transaction}></TransactionAccount>
                   ))}
                 </>:
-                    <Box sx={{width:"100%",height:"100%"}}>Transaksiyalar yoxdur :  Dizayn et</Box>
+                    <NoTransaction></NoTransaction>
                 }
               </Box>
           </Section>

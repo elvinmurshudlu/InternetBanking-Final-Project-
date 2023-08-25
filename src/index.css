@@ -25,3 +25,16 @@ font-family: 'Roboto', sans-serif!important;
 .dark .MuiInputLabel-animated{
     color: rgba(255, 255, 255, 0.7) !important;
 }
+
+
+.downloadChip{
+
+}
+
+.downloadChip:hover{
+    color: white;
+}
+
+.login_layout{
+    background: url(assets/pictures/slider/login4.jpg);
+}

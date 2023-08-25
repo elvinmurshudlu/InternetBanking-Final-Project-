@@ -352,10 +352,10 @@ const language = useContext(LanguageApi)
                 <NativeSelect
                     onChange={onChangeTheme}
                     value={mode.mode}
-                    sx={{backgroundColor:palette.inputFields[mode.mode]}}
+                    sx={{backgroundColor:palette.inputFields[mode.mode],padding:"0px 10px",borderRadius:"10px"}}
                 >
-                    <option value="dark">Dark</option>
-                    <option value="light">Light</option>
+                    <option style={{backgroundColor:palette['componentsBackground'][mode.mode],color:palette['textColor'][mode.mode] }} value="dark">Dark</option>
+                    <option style={{backgroundColor:palette['componentsBackground'][mode.mode],color:palette['textColor'][mode.mode] }} value="light">Light</option>
 
                 </NativeSelect>
             </Box>
@@ -363,10 +363,10 @@ const language = useContext(LanguageApi)
             <NativeSelect
                 onChange={onChangeLanguage}
                 value={language.language}
-                sx={{backgroundColor:palette.inputFields[mode.mode]}}
+                sx={{backgroundColor:palette.inputFields[mode.mode],padding:"0px 10px",borderRadius:"10px"}}
             >
-                <option value="AZE">AZE</option>
-                <option value="EN">EN</option>
+                <option style={{backgroundColor:palette['componentsBackground'][mode.mode],color:palette['textColor'][mode.mode] }} value="AZE">AZE</option>
+                <option style={{backgroundColor:palette['componentsBackground'][mode.mode],color:palette['textColor'][mode.mode] }} value="EN">EN</option>
 
             </NativeSelect>
         </Grid>

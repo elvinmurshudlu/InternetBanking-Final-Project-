@@ -3,11 +3,12 @@ import { Authendication } from "../../services/Auth";
 import { useNavigate } from "react-router-dom";
 import {useEffect,useState} from "react"
 import QrCode2Icon from '@mui/icons-material/QrCode2';
-
+import Logo from '../../assets/logo/logo-red.png'
 
 import imageOne from "../../assets/pictures/slider/login.jpg"
 import imageTwo from "../../assets/pictures/slider/login2.jpg"
 import imageThree from "../../assets/pictures/slider/login3.jpg"
+import imageFour from "../../assets/pictures/slider/login4.jpg"
 
 
 export default function Layout(props:any) {
@@ -38,7 +39,7 @@ export default function Layout(props:any) {
 
       useEffect(()=>{
 
-        let images = [imageOne,imageTwo,imageThree]
+        let images = [imageOne,imageTwo,imageThree,imageFour]
         let counter = 0
 
        let interval =  setInterval(()=>{
@@ -81,12 +82,13 @@ export default function Layout(props:any) {
     <>
     {isLogged || 
     
-    <Grid  container sx={{width:"100%",height:"100vh"}}>
+    <Grid className={'login_layout'}  container sx={{width:"100%",height:"100vh"}}>
 
         <Grid item sm={0} md={9} sx={{width:"100%", maxHeight:"100%",display:{xs:"none" , md:"inline"}}}  >
 
-          <Box component="div" sx={{width:"100%",maxHeight:"100%",overflow:"hidden"}}>
-             <img style={{width:"100%",height:"100%",objectFit:"cover",transition:"2s"}} src={currentImage} alt="" />
+          <Box component="div" sx={{width:"100%",height:"100%",overflow:"hidden"}}>
+              {/*<img style={{width:"100%",height:"100%",objectFit:"cover",transition:"2s"}} src={currentImage} alt="" />*/}
+              {/*<img style={{width:"100%",height:"100%",objectFit:"cover",transition:"2s"}} src={imageFour} alt="" />*/}
           </Box>
 
         </Grid>
@@ -95,8 +97,10 @@ export default function Layout(props:any) {
 
           <Grid item xs={12} sx={{display:"flex",justifyContent:"center"}}>
 
-            <h1 style={{width:"80%",padding:"10px",textAlign:'center',color:'red'
-            ,paddingTop:'40px',letterSpacing:"2px"}}>CoderBank</h1>
+            <div style={{width:"80%",padding:"10px",textAlign:'center',color:'red'
+            ,paddingTop:'40px',letterSpacing:"2px"}}>
+                <img style={{width:"100% "}} src={Logo} alt=""/>
+            </div>
 
           </Grid>
 

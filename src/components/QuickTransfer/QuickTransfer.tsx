@@ -157,6 +157,7 @@ export default function QuickTransfer() {
 
   return (
     <Box
+        className={mode.mode}
       sx={{
         width: "100%",
         padding: "15px",

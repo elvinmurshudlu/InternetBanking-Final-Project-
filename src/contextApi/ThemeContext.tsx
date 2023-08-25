@@ -65,6 +65,10 @@ export const palette = {
     buttonBackground:{
         'dark':'#8B0000',
         'light':'blue'
+    },
+    downloadChip:{
+        'dark':'rgba(255,255,255,0.61)',
+        'light':'rgba(0,0,0,0.31)'
     }
 
 } as {[key:string]:any}

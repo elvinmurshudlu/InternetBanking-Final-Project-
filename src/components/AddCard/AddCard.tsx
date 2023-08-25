@@ -117,6 +117,7 @@ export default function AddCard() {
   return (
     <Section header="Add New Card">
     <Box
+        className={mode.mode}
       sx={{
         borderRadius: "20px",
         backgroundColor: palette.componentsBackground[mode.mode],

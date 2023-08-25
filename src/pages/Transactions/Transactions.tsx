@@ -137,7 +137,8 @@ export default function Transactions() {
                                                   
           <Grid item xs={12}  sx={{height:"60%"}}>
 
-            {transactions && <Trasactions isLoading={isLoading} transactions={reverse(transactions)}></Trasactions>}
+            {transactions && <Trasactions isLoading={isLoading} transactions={reverse(transactions)}></Trasactions>
+            }
  
           </Grid> 
 
